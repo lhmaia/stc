@@ -72,67 +72,11 @@ int main(int argc, char** argv)
 	Reader r (input_file_name);
 	r.readDocument();
 
-	/*
-	 * ********** Medida do tempo de execucao ************
-	 * variaveis para medida do tempo de execucao
 
-		double tusuario;
-		double tsistema;
-		double texecucao;
-		struct timeval tinicio;
-		struct timeval tfim;
-		struct rusage recursos;
-		struct timeval usuario;
-		struct timeval sistema;
+	//execucao do processamento dos clusters
 
-		gettimeofday(&tinicio, NULL);
+	clust::processa_clusters(threshold);
 
-
-	 //* *****************************************************/
-
-
-
-		//execucao do processamento dos clusters
-
-		clust::processa_clusters(threshold);
-
-	/*
-	 * ********** Medida do tempo de execucao ************
-	 * variaveis para medida do tempo de execucao
-
-
-	//calculo do tempo
-		gettimeofday(&tfim, NULL);
-
-		getrusage(RUSAGE_SELF, &recursos);
-		usuario = recursos.ru_utime;
-		sistema = recursos.ru_stime;
-
-		tusuario = (double) recursos.ru_utime.tv_sec + 1.e-6 * (double) recursos.ru_utime.tv_usec;
-		tsistema = (double) recursos.ru_stime.tv_sec + 1.e-6 * (double) recursos.ru_stime.tv_usec;
-
-		texecucao = (tfim.tv_sec-tinicio.tv_sec)*1.e6;
-		texecucao = (texecucao+(tfim.tv_usec-tinicio.tv_usec))*1.e-6;
-		/*
-		printf("tempo de execucao: %5f\n", texecucao);
-		printf("tempo de usuario: %5f\n", tusuario);
-		printf("tempo de sistema: %5f\n", tsistema);
-		printf("--------------------------------------------------\n");
-
-		cout << clust::documents.size() << " " << texecucao << endl;
-
-
-	 //* *****************************************************/
-
-
-	clust::imprime_clusters(numtoprint);
-
-	//cout << endl << "----------------------------------------------------------------" << endl;
-	//cout << "***IMPRIMINDO ESTATISTICAS***" << endl;
-
-	//clust::grafico_termo_por_doc(numtostatistic);
-
-	//cout << endl << "----------------------------------------------------------------" << endl;
 
     return 0;
 }

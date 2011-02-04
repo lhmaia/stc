@@ -39,25 +39,6 @@ void clust::ordena_clusters(vector<clust> &clusters){
  * entre o conjunto de documentos de dois clusters
  */
 
-/*
-int clust::intersecao_doc (clust c1, clust c2){
-	int intersecao = 0;
-
-	for (set<int>::iterator it1 = c1.documentos.begin(); it1 != c1.documentos.end(); it1++){
-		for(set<int>::iterator it2 = c2.documentos.begin(); it2 != c2.documentos.end(); it2++){
-			if ((*it1) < (*it2)) break;
-			else{
-				if ((*it1) == (*it2)) {
-					intersecao++;
-					break;
-				}
-			}
-		}
-	}
-	return intersecao;
-}
-*/
-
 int clust::intersecao_doc (clust c1, clust c2){
 	set<int>::iterator it1 = c1.documentos.begin();
 	set<int>::iterator it2 = c2.documentos.begin();
@@ -103,8 +84,8 @@ clust::clust (int first, int tam, int Nodo){
 
 int clust::CalculaScore (){
 
-	const int mindocs = 3;
-	const float max_doc_percent = 0.4;
+	const int mindocs = 3;    //para que um termo seja considerado deve aparecer pelo menos mindocs vezes
+	const float max_doc_percent = 0.4; //e no maximo max_doc_percent
 
 	int totalnumdocs = documents.size();
 	//funcao que considera a relevancia de cada palavra de acordo com o numero de documentos onde aparece

@@ -39,7 +39,7 @@ void clust::ordena_clusters(vector<clust> &clusters){
  * entre o conjunto de documentos de dois clusters
  */
 
-int clust::intersecao_doc (clust c1, clust c2){
+int clust::intersecao_doc (clust c1, clust c2, set<int> &diff){
 	set<int>::iterator it1 = c1.documentos.begin();
 	set<int>::iterator it2 = c2.documentos.begin();
 
@@ -52,9 +52,23 @@ int clust::intersecao_doc (clust c1, clust c2){
 			it2++;
 		}
 		else {
-			if ((*it1) < (*it2)) it1++;
-			else it2++;
+			if ((*it1) < (*it2)) {
+				diff.insert(*it1);
+				it1++;
+			}
+			else {
+				diff.insert(*it2);
+				it2++;
+			}
 		}
+	}
+	while(it1 != c1.documentos.end()){
+		diff.insert(*it1);
+		it1++;
+	}
+	while(it2 != c2.documentos.end()){
+		diff.insert(*it2);
+		it2++;
 	}
 
 	return intersecao;
@@ -67,8 +81,8 @@ int clust::intersecao_doc (clust c1, clust c2){
 	 * |intersecao| / |docs 2| > thresold
 	 * neste caso retorna true
 	 */
-bool clust::similaridade (clust c1, clust c2){
-	int intersecao = intersecao_doc(c1, c2);
+bool clust::similaridade (clust c1, clust c2, set<int> &diff){
+	int intersecao = intersecao_doc(c1, c2, diff);
 	//cout << " intersecao: " << intersecao << " ";
 	bool comp1 = (( (float) intersecao )/( (float) c1.numero_documentos() )) > threshold;
 	bool comp2 = (( (float) intersecao )/( (float) c2.numero_documentos() )) > threshold;
@@ -140,26 +154,26 @@ void clust::merge_cluster (){
 	for (vector<clust>::iterator it1 = baseclusters.begin(); it1 < baseclusters.end() && it1 < (baseclusters.begin() + externo); it1++){
 		for (vector<clust>::iterator it2 = baseclusters.begin(); it2 < baseclusters.end() && it2 < (baseclusters.begin() + interno) && it1 < baseclusters.end();){
 			comp++;
-			if (it1 != it2 && similaridade(*it1, *it2)){
-				VERB {
-					vector<int>::iterator inodo = 	(*it2).nodo.begin();
-					vector<int>::iterator ifirst =  (*it2).first_char_index.begin();
-					vector<int>::iterator itam = 	(*it2).tam_sufixo.begin();
+			set<int> temp;
+			if (it1 != it2 && similaridade(*it1, *it2, temp)){
+				vector<int>::iterator inodo = 	(*it2).nodo.begin();
+				vector<int>::iterator ifirst =  (*it2).first_char_index.begin();
+				vector<int>::iterator itam = 	(*it2).tam_sufixo.begin();
 
-					for (;inodo < (*it2).nodo.end();){
-						//cout << *inodo << " ";
-						(*it1).nodo.push_back(*inodo);
-						(*it1).first_char_index.push_back(*ifirst);
-						(*it1).tam_sufixo.push_back(*itam);
+				for (;inodo < (*it2).nodo.end();){
+					//cout << *inodo << " ";
+					(*it1).nodo.push_back(*inodo);
+					(*it1).first_char_index.push_back(*ifirst);
+					(*it1).tam_sufixo.push_back(*itam);
 
-						inodo++;
-						ifirst++;
-						itam++;
-					}
+					inodo++;
+					ifirst++;
+					itam++;
 				}
 				//cout << " merge com: " << (*it1).nodo.at(0);
 				//cout << endl;
 				(*it1).atualiza_documentos();
+
 				baseclusters.erase(it2);
 				interno--;
 				externo--;
@@ -277,7 +291,7 @@ void clust::processa_clusters(float Threshold){
  	Calculo_Score(baseclusters);
 
  	VERB cout << "* Reordenando ..." << endl;
-	VERB ordena_clusters(baseclusters);
+	ordena_clusters(baseclusters);
 
 	VERB cout << "* Processamento terminado!!!" << endl << endl;
 }

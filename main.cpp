@@ -8,9 +8,6 @@
 
 #include "reader.h"
 #include "stree.h"
-#include <sys/time.h>
-#include <unistd.h>
-#include <sys/resource.h>
 
 #define NUM_TO_PRINT 50
 
@@ -44,7 +41,7 @@ int main(int argc, char** argv)
 	  	input_file_name = strdup(optarg);
 			break;
 
-			//valo do threshold
+			//valor do threshold
 		case 't':
 		threshold = atof(optarg);
 			break;
@@ -62,7 +59,7 @@ int main(int argc, char** argv)
     		verbose = true;
     		break;
 
-		// error message
+		// mensagem de erro
 		default:
 			cout << "./a.out -i <nome_arquivo>" << endl;
 			exit(1);
@@ -77,6 +74,7 @@ int main(int argc, char** argv)
 
 	clust::processa_clusters(threshold);
 
+	clust::imprime_clusters(numtoprint);
 
     return 0;
 }

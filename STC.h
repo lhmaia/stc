@@ -9,7 +9,7 @@
 #define STC_H_
 
 #define MIN_DOCS_CLUSTER 2
-#define N_RELEVANTES 500
+#define N_RELEVANTES 1000
 
 #define VERB if(verbose)
 
@@ -27,7 +27,8 @@ class clust {
 
 public:
 
-	vector<int> nodo;
+	vector<int> nodo;   //conjunto de nodos deste cluster (cluster basico tem apenas um nodo, mas
+						// apos a fase de merge sao adicionados novos nodos)
 	vector<int> first_char_index;
 	vector<int> tam_sufixo;
 
@@ -70,12 +71,12 @@ public:
 	 * |intersecao| / |docs 2| > thresold
 	 * neste caso retorna true
 	 */
-	static bool similaridade (clust c1, clust c2);
+	static bool similaridade (clust c1, clust c2, set<int> &diff);
 
 	/*retorna o numero de elementos na intersecao
 	 * entre o conjunto de documentos de dois clusters
 	 */
-	static int intersecao_doc (clust c1, clust c2);
+	static int intersecao_doc (clust c1, clust c2, set<int> &diff);
 
 
 };

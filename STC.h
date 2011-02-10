@@ -35,6 +35,9 @@ public:
 	set<int> documentos;
 	int score;
 
+	//armazena o rotulo do cluster
+	string label;
+
 
 	clust (int first, int tam, int Nodo);
 

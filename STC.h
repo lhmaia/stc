@@ -71,12 +71,12 @@ public:
 	 * |intersecao| / |docs 2| > thresold
 	 * neste caso retorna true
 	 */
-	static bool similaridade (clust c1, clust c2, set<int> &diff);
+	static bool similaridade (clust c1, clust c2);
 
 	/*retorna o numero de elementos na intersecao
 	 * entre o conjunto de documentos de dois clusters
 	 */
-	static int intersecao_doc (clust c1, clust c2, set<int> &diff);
+	static int intersecao_doc (clust c1, clust c2);
 
 
 };

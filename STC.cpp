@@ -39,7 +39,7 @@ void clust::ordena_clusters(vector<clust> &clusters){
  * entre o conjunto de documentos de dois clusters
  */
 
-int clust::intersecao_doc (clust c1, clust c2, set<int> &diff){
+int clust::intersecao_doc (clust c1, clust c2){
 	set<int>::iterator it1 = c1.documentos.begin();
 	set<int>::iterator it2 = c2.documentos.begin();
 
@@ -52,23 +52,9 @@ int clust::intersecao_doc (clust c1, clust c2, set<int> &diff){
 			it2++;
 		}
 		else {
-			if ((*it1) < (*it2)) {
-				diff.insert(*it1);
-				it1++;
-			}
-			else {
-				diff.insert(*it2);
-				it2++;
-			}
+			if ((*it1) < (*it2)) it1++;
+			else it2++;
 		}
-	}
-	while(it1 != c1.documentos.end()){
-		diff.insert(*it1);
-		it1++;
-	}
-	while(it2 != c2.documentos.end()){
-		diff.insert(*it2);
-		it2++;
 	}
 
 	return intersecao;
@@ -81,8 +67,8 @@ int clust::intersecao_doc (clust c1, clust c2, set<int> &diff){
 	 * |intersecao| / |docs 2| > thresold
 	 * neste caso retorna true
 	 */
-bool clust::similaridade (clust c1, clust c2, set<int> &diff){
-	int intersecao = intersecao_doc(c1, c2, diff);
+bool clust::similaridade (clust c1, clust c2){
+	int intersecao = intersecao_doc(c1, c2);
 	//cout << " intersecao: " << intersecao << " ";
 	bool comp1 = (( (float) intersecao )/( (float) c1.numero_documentos() )) > threshold;
 	bool comp2 = (( (float) intersecao )/( (float) c2.numero_documentos() )) > threshold;
@@ -154,8 +140,7 @@ void clust::merge_cluster (){
 	for (vector<clust>::iterator it1 = baseclusters.begin(); it1 < baseclusters.end() && it1 < (baseclusters.begin() + externo); it1++){
 		for (vector<clust>::iterator it2 = baseclusters.begin(); it2 < baseclusters.end() && it2 < (baseclusters.begin() + interno) && it1 < baseclusters.end();){
 			comp++;
-			set<int> temp;
-			if (it1 != it2 && similaridade(*it1, *it2, temp)){
+			if (it1 != it2 && similaridade(*it1, *it2)){
 				vector<int>::iterator inodo = 	(*it2).nodo.begin();
 				vector<int>::iterator ifirst =  (*it2).first_char_index.begin();
 				vector<int>::iterator itam = 	(*it2).tam_sufixo.begin();
@@ -172,7 +157,11 @@ void clust::merge_cluster (){
 				}
 				//cout << " merge com: " << (*it1).nodo.at(0);
 				//cout << endl;
-				(*it1).atualiza_documentos();
+
+				//(*it1).atualiza_documentos();
+				for (set<int>::iterator tmp = (*it2).documentos.begin(); tmp != (*it2).documentos.end(); tmp++)
+					(*it1).documentos.insert(*tmp);
+
 
 				baseclusters.erase(it2);
 				interno--;

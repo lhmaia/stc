@@ -31,6 +31,28 @@ int clust::compara_cluster(clust c1, clust c2){
 	return (c1.score > c2.score);
 }
 
+int clust::compara_frase(string frase1, int tam1, string frase2, int tam2){
+	int numdoc_frase1 = 0;
+	int numdoc_frase2 = 0;
+	size_t found;
+
+	//se as frase sao iguais retorna 1
+	if (frase1.compare(frase2) == 0) return 1;
+
+	for (set<int>::iterator it = documentos.begin(); it != documentos.end(); it++){
+		//verificando a cobertura
+		found = documents.at(*it).find(frase1);
+		if (found != string::npos) numdoc_frase1++;
+
+		found = documents.at(*it).find(frase2);
+		if (found != string::npos) numdoc_frase2++;
+	}
+
+	if (numdoc_frase1 == numdoc_frase2) return tam1 > tam2;
+	else return numdoc_frase1 > numdoc_frase2;
+
+}
+
 void clust::ordena_clusters(vector<clust> &clusters){
 	sort(clusters.begin(), clusters.end(), compara_cluster);
 }
@@ -180,6 +202,22 @@ void clust::merge_cluster (){
 	VERB cout << "Numero de comparacoes: " << comp << endl;
 }
 
+void clust::processa_label(){
+	//gerando frases
+	vector<string> frases;
+	string tmp_frase;
+	for (unsigned int t = 0; t < first_char_index.size(); t++){
+		tmp_frase = "";
+		//cout << "Sufixo de " << first_char_index.at(t) << " de tamanho " << tam_sufixo.at(t) << endl;
+		for (int i = first_char_index.at(t); i <= (tam_sufixo.at(t) + first_char_index.at(t) - 1); i++){
+			//cout << Edge::termos.at(i) << " ";
+			tmp_frase.append(Edge::termos.at(i));
+			tmp_frase.append(" ");
+		}
+		cout << tmp_frase << endl;
+	}
+}
+
 void clust::imprime_clusters(int n){
 	for (vector<clust>::iterator it = clust::baseclusters.begin(); it < clust::baseclusters.end() && it < (clust::baseclusters.begin() + n); it++){
 		if ((*it).tamanho_sufixo() >= 1){
@@ -281,6 +319,8 @@ void clust::processa_clusters(float Threshold){
 
  	VERB cout << "* Reordenando ..." << endl;
 	ordena_clusters(baseclusters);
+
+	baseclusters.at(0).processa_label();
 
 	VERB cout << "* Processamento terminado!!!" << endl << endl;
 }

@@ -49,6 +49,14 @@ public:
 	 */
 	void atualiza_documentos();
 
+	/*
+	 * compara duas frases com base na cobertura (numero de documentos do cluster que as contem) e
+	 * no número de palavras na frase
+	 */
+	int compara_frase(string frase1, int tam1, string frase2, int tam2);
+
+	void processa_label();
+
 	static vector<clust> baseclusters;
 	static vector<string> documents;
 	static float threshold;

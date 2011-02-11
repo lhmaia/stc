@@ -38,15 +38,20 @@ int clust::compara_frase(string frase1, int tam1, string frase2, int tam2){
 
 	//se as frase sao iguais retorna 1
 	if (frase1.compare(frase2) == 0) return 1;
+	cout << "procurando:" << endl;
+	cout << frase1 << " - " << frase2 << endl;
 
 	for (set<int>::iterator it = documentos.begin(); it != documentos.end(); it++){
 		//verificando a cobertura
-		found = documents.at(*it).find(frase1);
+		cout << documents.at(*it - 1) << endl;
+		found = documents.at(*it - 1).find(frase1);
 		if (found != string::npos) numdoc_frase1++;
 
-		found = documents.at(*it).find(frase2);
+		found = documents.at(*it - 1).find(frase2);
 		if (found != string::npos) numdoc_frase2++;
 	}
+	cout << numdoc_frase1 << endl;
+	cout << numdoc_frase2 << endl;
 
 	if (numdoc_frase1 == numdoc_frase2) return tam1 > tam2;
 	else return numdoc_frase1 > numdoc_frase2;
@@ -212,10 +217,12 @@ void clust::processa_label(){
 		for (int i = first_char_index.at(t); i <= (tam_sufixo.at(t) + first_char_index.at(t) - 1); i++){
 			//cout << Edge::termos.at(i) << " ";
 			tmp_frase.append(Edge::termos.at(i));
-			tmp_frase.append(" ");
+			if ((i + 1) <= (tam_sufixo.at(t) + first_char_index.at(t) - 1)) tmp_frase.append(" ");
 		}
+		frases.push_back(tmp_frase);
 		cout << tmp_frase << endl;
 	}
+	cout << compara_frase(frases.at(1), tam_sufixo.at(1), frases.at(0), tam_sufixo.at(0)) << endl;
 }
 
 void clust::imprime_clusters(int n){

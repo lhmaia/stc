@@ -55,6 +55,14 @@ public:
 	 */
 	int compara_frase(string frase1, int tam1, string frase2, int tam2);
 
+	void QuickSort (vector<string> &frases);
+
+	void Ordena (unsigned int Esq, unsigned int Dir, vector<string> &frases);
+
+	void Particao (unsigned int Esq, unsigned int Dir, unsigned int &i, unsigned int &j, vector<string> &frases);
+
+	/*****************************************************************************/
+
 	void processa_label();
 
 	static vector<clust> baseclusters;

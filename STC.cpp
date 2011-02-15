@@ -423,28 +423,33 @@ int clust::compara_frase(string frase1, string frase2, int tam1, int tam2){
 }
 
 //funcao particao
-void clust::Particao (unsigned int Esq, unsigned int Dir, unsigned int &i, unsigned int &j, vector<string> &frases){
+void clust::Particao (unsigned int Esq, unsigned int Dir, unsigned int &i, unsigned int &j, vector<string> &frases, vector<int> &tmp_sufixo){
 
 	string pivo, aux;
-	int int_pivo, tam_pivo;
+	int int_pivo, tam_pivo, tam_aux;
 	i = Esq;
 	j = Dir;
 	int_pivo = (i + j)/2;
 	pivo = frases.at(int_pivo);
-	tam_pivo = tam_sufixo.at(int_pivo);
+	tam_pivo = tmp_sufixo.at(int_pivo);
+
 	do{
-		while (compara_frase(frases.at(i), pivo, tam_sufixo.at(i), tam_pivo)){
+		while (compara_frase(frases.at(i), pivo, tmp_sufixo.at(i), tam_pivo)){
 			i++;
 		}
-		while (compara_frase(pivo, frases.at(j), tam_pivo, tam_sufixo.at(j))){
+		while (compara_frase(pivo, frases.at(j), tam_pivo, tmp_sufixo.at(j))){
 			j--;
 		}
 		cout << "esgotou pivo" << endl;
 		if (i <= j){
 			cout << "faz troca" << endl;
 			aux = frases.at(i);
+			tam_aux = tmp_sufixo.at(i);
+
 			frases.at(i) = frases.at(j);
 			frases.at(j) = aux;
+			tmp_sufixo.at(i) = tmp_sufixo.at(j);
+			tmp_sufixo.at(j) = tam_aux;
 			i++;
 			j--;
 		}
@@ -452,17 +457,18 @@ void clust::Particao (unsigned int Esq, unsigned int Dir, unsigned int &i, unsig
 
 }
 //funcao ordena
-void clust::Ordena (unsigned int Esq, unsigned int Dir, vector<string> &frases){
+void clust::Ordena (unsigned int Esq, unsigned int Dir, vector<string> &frases, vector<int> &tmp_sufixo){
 
 	unsigned int i, j;
-	Particao (Esq, Dir, i, j, frases);
-	if (Esq < j) Ordena (Esq, j, frases);
-	if (i < Dir) Ordena (i, Dir, frases);
+	Particao (Esq, Dir, i, j, frases, tmp_sufixo);
+	if (Esq < j) Ordena (Esq, j, frases, tmp_sufixo);
+	if (i < Dir) Ordena (i, Dir, frases, tmp_sufixo);
 
 }
 //QuickSort Recursivo
 void clust::QuickSort (vector<string> &frases){
 
-	Ordena (0, frases.size() - 1, frases);
+	vector<int>tmp_sufixo = tam_sufixo;
+	Ordena (0, frases.size() - 1, frases, tmp_sufixo);
 
 }

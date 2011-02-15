@@ -57,9 +57,9 @@ public:
 
 	void QuickSort (vector<string> &frases);
 
-	void Ordena (unsigned int Esq, unsigned int Dir, vector<string> &frases);
+	void Ordena (unsigned int Esq, unsigned int Dir, vector<string> &frases, vector<int> &tmp_sufixo);
 
-	void Particao (unsigned int Esq, unsigned int Dir, unsigned int &i, unsigned int &j, vector<string> &frases);
+	void Particao (unsigned int Esq, unsigned int Dir, unsigned int &i, unsigned int &j, vector<string> &frases, vector<int> &tmp_sufixo);
 
 	/*****************************************************************************/
 

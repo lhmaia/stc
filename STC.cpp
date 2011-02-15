@@ -195,12 +195,16 @@ void clust::processa_label(){
 		frases.push_back(tmp_frase);
 		cout << tmp_frase << endl;
 	}
-	cout << compara_frase(frases.at(0), tam_sufixo.at(0), frases.at(2), tam_sufixo.at(2)) << endl;
+	cout << compara_frase(frases.at(0), frases.at(2), tam_sufixo.at(0), tam_sufixo.at(2)) << endl;
 
 	//ordenando as frases de acordo com a cobertura e o numero de termos
 
-
 	//sort(frases.begin(), frases.end(), this.compara);
+	QuickSort(frases);
+
+	cout << "Elementos ordenados:" << endl;
+	for (vector<string>::iterator itaux = frases.begin(); itaux < frases.end(); itaux++)
+		cout << *itaux << endl;
 }
 
 
@@ -390,7 +394,7 @@ void clust::grafico_termo_por_doc(int n_primeiros){
  * funcoes para ordenacao das frases segundo os criterios para determinacao do label
  */
 
-int clust::compara_frase(string frase1, int tam1, string frase2, int tam2){
+int clust::compara_frase(string frase1, string frase2, int tam1, int tam2){
 	int numdoc_frase1 = 0;
 	int numdoc_frase2 = 0;
 	size_t found;
@@ -402,7 +406,7 @@ int clust::compara_frase(string frase1, int tam1, string frase2, int tam2){
 
 	for (set<int>::iterator it = documentos.begin(); it != documentos.end(); it++){
 		//verificando a cobertura
-		cout << documents.at(*it - 1) << endl;
+		//cout << documents.at(*it - 1) << endl;
 		found = documents.at(*it - 1).find(frase1);
 		if (found != string::npos) numdoc_frase1++;
 
@@ -411,6 +415,7 @@ int clust::compara_frase(string frase1, int tam1, string frase2, int tam2){
 	}
 	cout << numdoc_frase1 << endl;
 	cout << numdoc_frase2 << endl;
+	cout << tam1 << ", " << tam2 << endl;
 
 	if (numdoc_frase1 == numdoc_frase2) return tam1 > tam2;
 	else return numdoc_frase1 > numdoc_frase2;
@@ -421,17 +426,22 @@ int clust::compara_frase(string frase1, int tam1, string frase2, int tam2){
 void clust::Particao (unsigned int Esq, unsigned int Dir, unsigned int &i, unsigned int &j, vector<string> &frases){
 
 	string pivo, aux;
+	int int_pivo, tam_pivo;
 	i = Esq;
 	j = Dir;
-	pivo = frases.at((i + j)/2);
+	int_pivo = (i + j)/2;
+	pivo = frases.at(int_pivo);
+	tam_pivo = tam_sufixo.at(int_pivo);
 	do{
-		while (pivo > frases.at(i)){
+		while (compara_frase(frases.at(i), pivo, tam_sufixo.at(i), tam_pivo)){
 			i++;
 		}
-		while (pivo < frases.at(j)){
+		while (compara_frase(pivo, frases.at(j), tam_pivo, tam_sufixo.at(j))){
 			j--;
 		}
+		cout << "esgotou pivo" << endl;
 		if (i <= j){
+			cout << "faz troca" << endl;
 			aux = frases.at(i);
 			frases.at(i) = frases.at(j);
 			frases.at(j) = aux;

@@ -53,7 +53,7 @@ public:
 	 * compara duas frases com base na cobertura (numero de documentos do cluster que as contem) e
 	 * no número de palavras na frase
 	 */
-	int compara_frase(string frase1, int tam1, string frase2, int tam2);
+	int compara_frase(string frase1, string frase2, int tam1, int tam2);
 
 	void QuickSort (vector<string> &frases);
 

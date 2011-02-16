@@ -400,7 +400,7 @@ int clust::compara_frase(string frase1, string frase2, int tam1, int tam2){
 	size_t found;
 
 	//se as frase sao iguais retorna 1
-	if (frase1.compare(frase2) == 0) return 1;
+	if (frase1.compare(frase2) == 0) return 0;
 	cout << "procurando:" << endl;
 	cout << frase1 << " - " << frase2 << endl;
 

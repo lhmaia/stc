@@ -181,9 +181,19 @@ void clust::merge_cluster (){
 }
 
 void clust::processa_label(){
+	//parametros do label
+	int num_frases = 6;
+	int max = 20;
+	int min_dif_cobertura = 20;
+	int max_overlap = 60;
+
 	//gerando frases
 	vector<string> frases;
+	vector<float> cobertura;
 	string tmp_frase;
+	int tmp_numdocs;
+
+
 	for (unsigned int t = 0; t < first_char_index.size(); t++){
 		tmp_frase = "";
 		//cout << "Sufixo de " << first_char_index.at(t) << " de tamanho " << tam_sufixo.at(t) << endl;
@@ -192,19 +202,113 @@ void clust::processa_label(){
 			tmp_frase.append(Edge::termos.at(i));
 			if ((i + 1) <= (tam_sufixo.at(t) + first_char_index.at(t) - 1)) tmp_frase.append(" ");
 		}
+
+		size_t found = string::npos;
+		tmp_numdocs = 0;
+		for (set<int>::iterator it = documentos.begin(); it != documentos.end(); it++){
+			//verificando a cobertura
+			found = documents.at(*it - 1).find(tmp_frase);
+			if (found != string::npos) tmp_numdocs++;
+
+		}
+		float cob = ((float) tmp_numdocs / (float) documentos.size()) * 100;
+
+		cobertura.push_back(cob);
 		frases.push_back(tmp_frase);
-		cout << tmp_frase << endl;
+		cout << tmp_frase << ": "<< cob << "%" << endl;
 	}
-	cout << compara_frase(frases.at(0), frases.at(2), tam_sufixo.at(0), tam_sufixo.at(2)) << endl;
+	//cout << compara_frase(frases.at(0), frases.at(2), tam_sufixo.at(0), tam_sufixo.at(2)) << endl;
 
 	//ordenando as frases de acordo com a cobertura e o numero de termos
 
 	//sort(frases.begin(), frases.end(), this.compara);
-	QuickSort(frases);
+	QuickSort(frases, cobertura);
 
-	cout << "Elementos ordenados:" << endl;
-	for (vector<string>::iterator itaux = frases.begin(); itaux < frases.end(); itaux++)
-		cout << *itaux << endl;
+	if (frases.size() < max) max = frases.size();
+	/*
+	 * a matriz abaixo possui uma coluna contendo a
+	 * informacao se a frase e most specific, most general e se e ou nao selecionada
+	 */
+	bool tabela_seleciona [max][3];
+
+	for (int i = 0; i < max; i++){
+		bool most_general = true;
+		bool most_specific = true;
+		bool most_general_low = true;
+		for (int j = 0; j < max; j++){
+			if(i != j){
+				//verificando se frase j e super frase de i
+				if (frases.at(j).find(frases.at(i)) != string::npos){
+					//tem super frase
+					most_specific = false;
+					if ((cobertura.at(i) - cobertura.at(j)) >= min_dif_cobertura) most_general_low = false;
+				}
+				//verificando se frase j e sub frase de i
+				if (frases.at(i).find(frases.at(j)) != string::npos){
+					//tem sub frase
+					most_general = false;
+				}
+
+				//aplicando heuristica Word Overlap (se ha overlap de mais de 60% das palavras nao e selecionada)
+				if (i < j){
+					size_t found = string::npos;
+					int tam_overlap = 0;
+					int num_palavras = 0;
+
+					char aux[frases.at(i).size()];
+					strcpy(aux, frases.at(i).c_str());
+
+					char* palavra = strtok(aux, " ");
+
+					while(palavra != NULL){
+						num_palavras++;
+						if (palavra != NULL) {
+							if(frases.at(j).find(palavra) != string::npos) tam_overlap++;
+						}
+						palavra = strtok(NULL, " ");
+					}
+					if (((float)tam_overlap / (float) num_palavras) > max_overlap) {
+						most_general = false;
+						most_specific = false;
+					}
+				}
+			}
+		}
+		bool selecionada;
+		if (most_specific) selecionada = true;
+		else{
+			if (most_general && !most_general_low) selecionada = true;
+			else selecionada = false;
+		}
+		tabela_seleciona[i][0] = most_specific;
+		tabela_seleciona[i][1] = most_general;
+		tabela_seleciona[i][2] = selecionada;
+	}
+
+
+	cout << endl << "Elementos ordenados:" << endl;
+		for (unsigned int i = 0; i < frases.size(); i++){
+			cout << frases.at(i) << ": "<< cobertura.at(i) << "% - ";
+			if (tabela_seleciona[i][0]) cout << 1 << " - "; else cout << 0 << " - ";
+			if (tabela_seleciona[i][1]) cout << 1 << " - "; else cout << 0 << " - ";
+			if (tabela_seleciona[i][2]) cout << 1; else cout << 0;
+			cout << endl;
+		}
+
+	int conta_frase = 0;
+	label = "";
+	for (unsigned int i = 0; i < max; i++){
+		if (tabela_seleciona[i][2]){
+			conta_frase++;
+			if (label.compare("") == 0) label = frases.at(i);
+			else {
+				label.append(", ");
+				label.append(frases.at(i));
+			}
+			if (conta_frase >= num_frases) break;
+		}
+	}
+
 }
 
 
@@ -212,6 +316,8 @@ void clust::processa_label(){
 void clust::imprime_clusters(int n){
 	for (vector<clust>::iterator it = clust::baseclusters.begin(); it < clust::baseclusters.end() && it < (clust::baseclusters.begin() + n); it++){
 		if ((*it).tamanho_sufixo() >= 1){
+
+			cout << "Label: " << (*it).label << endl;
 
 			cout << "Nodos: ";
 
@@ -311,7 +417,9 @@ void clust::processa_clusters(float Threshold){
  	VERB cout << "* Reordenando ..." << endl;
 	ordena_clusters(baseclusters);
 
-	baseclusters.at(0).processa_label();
+	VERB cout << "* Processamento dos labels ..." << endl;
+	for (int cluster = 0; cluster < N_RELEVANTES && cluster < baseclusters.size(); cluster++)
+		baseclusters.at(cluster).processa_label();
 
 	VERB cout << "* Processamento terminado!!!" << endl << endl;
 }
@@ -394,62 +502,49 @@ void clust::grafico_termo_por_doc(int n_primeiros){
  * funcoes para ordenacao das frases segundo os criterios para determinacao do label
  */
 
-int clust::compara_frase(string frase1, string frase2, int tam1, int tam2){
-	int numdoc_frase1 = 0;
-	int numdoc_frase2 = 0;
-	size_t found;
+int clust::compara_frase(string frase1, string frase2, int tam1, int tam2, float cobertura1, float cobertura2){
 
-	//se as frase sao iguais retorna 1
+	//se as frase sao iguais retorna 0
 	if (frase1.compare(frase2) == 0) return 0;
-	cout << "procurando:" << endl;
-	cout << frase1 << " - " << frase2 << endl;
 
-	for (set<int>::iterator it = documentos.begin(); it != documentos.end(); it++){
-		//verificando a cobertura
-		//cout << documents.at(*it - 1) << endl;
-		found = documents.at(*it - 1).find(frase1);
-		if (found != string::npos) numdoc_frase1++;
-
-		found = documents.at(*it - 1).find(frase2);
-		if (found != string::npos) numdoc_frase2++;
-	}
-	cout << numdoc_frase1 << endl;
-	cout << numdoc_frase2 << endl;
-	cout << tam1 << ", " << tam2 << endl;
-
-	if (numdoc_frase1 == numdoc_frase2) return tam1 > tam2;
-	else return numdoc_frase1 > numdoc_frase2;
-
+	if (cobertura1 == cobertura2) return tam1 > tam2;
+	else return cobertura1 > cobertura2;
 }
 
 //funcao particao
-void clust::Particao (unsigned int Esq, unsigned int Dir, unsigned int &i, unsigned int &j, vector<string> &frases, vector<int> &tmp_sufixo){
+void clust::Particao (int Esq, int Dir, int &i, int &j, vector<string> &frases, vector<int> &tmp_sufixo, vector<float> &cobertura){
 
 	string pivo, aux;
 	int int_pivo, tam_pivo, tam_aux;
+	float cob_pivo, cob_aux;
 	i = Esq;
 	j = Dir;
 	int_pivo = (i + j)/2;
 	pivo = frases.at(int_pivo);
 	tam_pivo = tmp_sufixo.at(int_pivo);
+	cob_pivo = cobertura.at(int_pivo);
 
 	do{
-		while (compara_frase(frases.at(i), pivo, tmp_sufixo.at(i), tam_pivo)){
+		while (compara_frase(frases.at(i), pivo, tmp_sufixo.at(i), tam_pivo, cobertura.at(i), cob_pivo)){
 			i++;
 		}
-		while (compara_frase(pivo, frases.at(j), tam_pivo, tmp_sufixo.at(j))){
+		while (compara_frase(pivo, frases.at(j), tam_pivo, tmp_sufixo.at(j), cob_pivo, cobertura.at(j))){
 			j--;
 		}
-		cout << "esgotou pivo" << endl;
 		if (i <= j){
-			cout << "faz troca" << endl;
 			aux = frases.at(i);
 			tam_aux = tmp_sufixo.at(i);
+			cob_aux = cobertura.at(i);
 
 			frases.at(i) = frases.at(j);
 			frases.at(j) = aux;
+
 			tmp_sufixo.at(i) = tmp_sufixo.at(j);
 			tmp_sufixo.at(j) = tam_aux;
+
+			cobertura.at(i) = cobertura.at(j);
+			cobertura.at(j) = cob_aux;
+
 			i++;
 			j--;
 		}
@@ -457,18 +552,18 @@ void clust::Particao (unsigned int Esq, unsigned int Dir, unsigned int &i, unsig
 
 }
 //funcao ordena
-void clust::Ordena (unsigned int Esq, unsigned int Dir, vector<string> &frases, vector<int> &tmp_sufixo){
+void clust::Ordena (int Esq, int Dir, vector<string> &frases, vector<int> &tmp_sufixo, vector<float> &cobertura){
 
-	unsigned int i, j;
-	Particao (Esq, Dir, i, j, frases, tmp_sufixo);
-	if (Esq < j) Ordena (Esq, j, frases, tmp_sufixo);
-	if (i < Dir) Ordena (i, Dir, frases, tmp_sufixo);
+	int i, j;
+	Particao (Esq, Dir, i, j, frases, tmp_sufixo, cobertura);
+	if (Esq < j) Ordena (Esq, j, frases, tmp_sufixo, cobertura);
+	if (i < Dir) Ordena (i, Dir, frases, tmp_sufixo, cobertura);
 
 }
 //QuickSort Recursivo
-void clust::QuickSort (vector<string> &frases){
+void clust::QuickSort (vector<string> &frases, vector<float> &cobertura){
 
 	vector<int>tmp_sufixo = tam_sufixo;
-	Ordena (0, frases.size() - 1, frases, tmp_sufixo);
+	Ordena (0, frases.size() - 1, frases, tmp_sufixo, cobertura);
 
 }

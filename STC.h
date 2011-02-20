@@ -53,13 +53,13 @@ public:
 	 * compara duas frases com base na cobertura (numero de documentos do cluster que as contem) e
 	 * no número de palavras na frase
 	 */
-	int compara_frase(string frase1, string frase2, int tam1, int tam2);
+	int compara_frase(string frase1, string frase2, int tam1, int tam2, float cobertura1, float cobertura2);
 
-	void QuickSort (vector<string> &frases);
+	void QuickSort (vector<string> &frases, vector<float> &cobertura);
 
-	void Ordena (unsigned int Esq, unsigned int Dir, vector<string> &frases, vector<int> &tmp_sufixo);
+	void Ordena (int Esq, int Dir, vector<string> &frases, vector<int> &tmp_sufixo, vector<float> &cobertura);
 
-	void Particao (unsigned int Esq, unsigned int Dir, unsigned int &i, unsigned int &j, vector<string> &frases, vector<int> &tmp_sufixo);
+	void Particao (int Esq, int Dir, int &i, int &j, vector<string> &frases, vector<int> &tmp_sufixo, vector<float> &cobertura);
 
 	/*****************************************************************************/
 

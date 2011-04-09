@@ -13,6 +13,10 @@ Reader::Reader(string Path){
 
 void Reader::readDocument(){
 	ifstream stream_doc(path.c_str(), ios::in);
+	if (!stream_doc.is_open()) {
+		cout << "arquivo nao encontrado." << endl;
+		exit(1);
+	}
 	string document;
 	getline(stream_doc, document);
 

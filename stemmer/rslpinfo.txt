@@ -1,8 +1,0 @@
-RSLP Stemmer loading...
-Loading steps and rules from: 'steprules.txt'
-Error opening flow file '(null)'.
-Total steps loaded: 7
-Stems dictionary is on
-Named Entities is on. Dictionary loaded with 0 names.
-Unloading stem dictionary with 71995 nodes, 19126 words, using 16 Mb (max allowed was 300 Mb).
-RSLP Stemmer unloaded.

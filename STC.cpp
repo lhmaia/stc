@@ -285,7 +285,7 @@ void clust::processa_label(){
 		tabela_seleciona[i][2] = selecionada;
 	}
 
-
+/*
 	cout << endl << "Elementos ordenados:" << endl;
 		for (unsigned int i = 0; i < frases.size(); i++){
 			cout << frases.at(i) << ": "<< cobertura.at(i) << "% - ";
@@ -293,7 +293,7 @@ void clust::processa_label(){
 			if (tabela_seleciona[i][1]) cout << 1 << " - "; else cout << 0 << " - ";
 			if (tabela_seleciona[i][2]) cout << 1; else cout << 0;
 			cout << endl;
-		}
+		}*/
 
 	int conta_frase = 0;
 	label = "";

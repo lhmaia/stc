@@ -1,0 +1,1493 @@
+---------------------------------------------------------------------------------
+Structure allocate at 0x8360478, with 60 bytes
+Rule String: 'Plural'
+Rule name: Plural.
+Min. Word Size: 3.
+Exceptions compare: all word.
+	End Word Condition [1]: s.
+Read 11 suffixes for this rule
+=============================================================
+Structure allocate @ 0x8360478
+Rule name:	 'Plural'
+Min. word size:	 3
+[01] End Word: 's'
+-------------------------------------------------------------
+[001] Suffix:	'ns'
+Min. stem size:	1
+Replacement:	'm'
+-------------------------------------------------------------
+[002] Suffix:	'ões'
+Min. stem size:	3
+Replacement:	'ão'
+-------------------------------------------------------------
+[003] Suffix:	'ães'
+Min. stem size:	1
+Replacement:	'ão'
+Exceptions:	1
+		01: 'mãe'
+-------------------------------------------------------------
+[004] Suffix:	'ais'
+Min. stem size:	1
+Replacement:	'al'
+Exceptions:	2
+		01: 'cais'
+		02: 'mais'
+-------------------------------------------------------------
+[005] Suffix:	'éis'
+Min. stem size:	2
+Replacement:	'el'
+-------------------------------------------------------------
+[006] Suffix:	'eis'
+Min. stem size:	2
+Replacement:	'el'
+-------------------------------------------------------------
+[007] Suffix:	'óis'
+Min. stem size:	2
+Replacement:	'ol'
+-------------------------------------------------------------
+[008] Suffix:	'is'
+Min. stem size:	2
+Replacement:	'il'
+Exceptions:	9
+		01: 'lápis'
+		02: 'cais'
+		03: 'mais'
+		04: 'crúcis'
+		05: 'biquínis'
+		06: 'pois'
+		07: 'depois'
+		08: 'dois'
+		09: 'leis'
+-------------------------------------------------------------
+[009] Suffix:	'les'
+Min. stem size:	3
+Replacement:	'l'
+-------------------------------------------------------------
+[010] Suffix:	'res'
+Min. stem size:	3
+Replacement:	'r'
+-------------------------------------------------------------
+[011] Suffix:	's'
+Min. stem size:	2
+Replacement:	'none'
+Exceptions:	22
+		01: 'aliás'
+		02: 'pires'
+		03: 'lápis'
+		04: 'cais'
+		05: 'mais'
+		06: 'mas'
+		07: 'menos'
+		08: 'férias'
+		09: 'fezes'
+		10: 'pêsames'
+		11: 'crúcis'
+		12: 'gás'
+		13: 'atrás'
+		14: 'moisés'
+		15: 'através'
+		16: 'convés'
+		17: 'ês'
+		18: 'país'
+		19: 'após'
+		20: 'ambas'
+		21: 'ambos'
+		22: 'messias'
+=============================================================
+---------------------------------------------------------------------------------
+Structure allocate at 0x8361d18, with 60 bytes
+Rule String: 'Feminine'
+Rule name: Feminine.
+Min. Word Size: 3.
+Exceptions compare: all word.
+	End Word Condition [1]: a.
+	End Word Condition [2]: ã.
+Read 15 suffixes for this rule
+=============================================================
+Structure allocate @ 0x8361d18
+Rule name:	 'Feminine'
+Min. word size:	 3
+[01] End Word: 'a'
+[02] End Word: 'ã'
+-------------------------------------------------------------
+[001] Suffix:	'ona'
+Min. stem size:	3
+Replacement:	'ão'
+Exceptions:	9
+		01: 'abandona'
+		02: 'lona'
+		03: 'iona'
+		04: 'cortisona'
+		05: 'monótona'
+		06: 'maratona'
+		07: 'acetona'
+		08: 'detona'
+		09: 'carona'
+-------------------------------------------------------------
+[002] Suffix:	'ora'
+Min. stem size:	3
+Replacement:	'or'
+-------------------------------------------------------------
+[003] Suffix:	'na'
+Min. stem size:	4
+Replacement:	'no'
+Exceptions:	15
+		01: 'carona'
+		02: 'abandona'
+		03: 'lona'
+		04: 'iona'
+		05: 'cortisona'
+		06: 'monótona'
+		07: 'maratona'
+		08: 'acetona'
+		09: 'detona'
+		10: 'guiana'
+		11: 'campana'
+		12: 'grana'
+		13: 'caravana'
+		14: 'banana'
+		15: 'paisana'
+-------------------------------------------------------------
+[004] Suffix:	'inha'
+Min. stem size:	3
+Replacement:	'inho'
+Exceptions:	3
+		01: 'rainha'
+		02: 'linha'
+		03: 'minha'
+-------------------------------------------------------------
+[005] Suffix:	'esa'
+Min. stem size:	3
+Replacement:	'ês'
+Exceptions:	7
+		01: 'mesa'
+		02: 'obesa'
+		03: 'princesa'
+		04: 'turquesa'
+		05: 'ilesa'
+		06: 'pesa'
+		07: 'presa'
+-------------------------------------------------------------
+[006] Suffix:	'osa'
+Min. stem size:	3
+Replacement:	'oso'
+Exceptions:	2
+		01: 'mucosa'
+		02: 'prosa'
+-------------------------------------------------------------
+[007] Suffix:	'íaca'
+Min. stem size:	3
+Replacement:	'íaco'
+-------------------------------------------------------------
+[008] Suffix:	'ica'
+Min. stem size:	3
+Replacement:	'ico'
+Exceptions:	1
+		01: 'dica'
+-------------------------------------------------------------
+[009] Suffix:	'ada'
+Min. stem size:	2
+Replacement:	'ado'
+Exceptions:	1
+		01: 'pitada'
+-------------------------------------------------------------
+[010] Suffix:	'ida'
+Min. stem size:	3
+Replacement:	'ido'
+Exceptions:	1
+		01: 'vida'
+-------------------------------------------------------------
+[011] Suffix:	'ída'
+Min. stem size:	3
+Replacement:	'ido'
+Exceptions:	3
+		01: 'recaída'
+		02: 'saída'
+		03: 'dúvida'
+-------------------------------------------------------------
+[012] Suffix:	'ima'
+Min. stem size:	3
+Replacement:	'imo'
+Exceptions:	1
+		01: 'vítima'
+-------------------------------------------------------------
+[013] Suffix:	'iva'
+Min. stem size:	3
+Replacement:	'ivo'
+Exceptions:	2
+		01: 'saliva'
+		02: 'oliva'
+-------------------------------------------------------------
+[014] Suffix:	'eira'
+Min. stem size:	3
+Replacement:	'eiro'
+Exceptions:	10
+		01: 'beira'
+		02: 'cadeira'
+		03: 'frigideira'
+		04: 'bandeira'
+		05: 'feira'
+		06: 'capoeira'
+		07: 'barreira'
+		08: 'fronteira'
+		09: 'besteira'
+		10: 'poeira'
+-------------------------------------------------------------
+[015] Suffix:	'ã'
+Min. stem size:	2
+Replacement:	'ão'
+Exceptions:	4
+		01: 'amanhã'
+		02: 'arapuã'
+		03: 'fã'
+		04: 'divã'
+=============================================================
+---------------------------------------------------------------------------------
+Structure allocate at 0x83630b0, with 60 bytes
+Rule String: 'Adverb'
+Rule name: Adverb.
+Min. Word Size: 0.
+Exceptions compare: suffix only.
+Read 1 suffixes for this rule
+=============================================================
+Structure allocate @ 0x83630b0
+Rule name:	 'Adverb'
+Min. word size:	 0
+-------------------------------------------------------------
+[001] Suffix:	'mente'
+Min. stem size:	4
+Replacement:	'none'
+Exceptions:	1
+		01: 'experimente'
+=============================================================
+---------------------------------------------------------------------------------
+Structure allocate at 0x83677b8, with 60 bytes
+Rule String: 'Augmentative'
+Rule name: Augmentative.
+Min. Word Size: 0.
+Exceptions compare: all word.
+Read 23 suffixes for this rule
+=============================================================
+Structure allocate @ 0x83677b8
+Rule name:	 'Augmentative'
+Min. word size:	 0
+-------------------------------------------------------------
+[001] Suffix:	'díssimo'
+Min. stem size:	5
+Replacement:	'none'
+-------------------------------------------------------------
+[002] Suffix:	'abilíssimo'
+Min. stem size:	5
+Replacement:	'none'
+-------------------------------------------------------------
+[003] Suffix:	'íssimo'
+Min. stem size:	3
+Replacement:	'none'
+-------------------------------------------------------------
+[004] Suffix:	'ésimo'
+Min. stem size:	3
+Replacement:	'none'
+-------------------------------------------------------------
+[005] Suffix:	'érrimo'
+Min. stem size:	4
+Replacement:	'none'
+-------------------------------------------------------------
+[006] Suffix:	'zinho'
+Min. stem size:	2
+Replacement:	'none'
+-------------------------------------------------------------
+[007] Suffix:	'quinho'
+Min. stem size:	4
+Replacement:	'c'
+-------------------------------------------------------------
+[008] Suffix:	'uinho'
+Min. stem size:	4
+Replacement:	'none'
+-------------------------------------------------------------
+[009] Suffix:	'adinho'
+Min. stem size:	3
+Replacement:	'none'
+-------------------------------------------------------------
+[010] Suffix:	'inho'
+Min. stem size:	3
+Replacement:	'none'
+Exceptions:	2
+		01: 'caminho'
+		02: 'cominho'
+-------------------------------------------------------------
+[011] Suffix:	'alhão'
+Min. stem size:	4
+Replacement:	'none'
+-------------------------------------------------------------
+[012] Suffix:	'uça'
+Min. stem size:	4
+Replacement:	'none'
+-------------------------------------------------------------
+[013] Suffix:	'aço'
+Min. stem size:	4
+Replacement:	'none'
+Exceptions:	1
+		01: 'antebraço'
+-------------------------------------------------------------
+[014] Suffix:	'aça'
+Min. stem size:	4
+Replacement:	'none'
+-------------------------------------------------------------
+[015] Suffix:	'adão'
+Min. stem size:	4
+Replacement:	'none'
+-------------------------------------------------------------
+[016] Suffix:	'idão'
+Min. stem size:	4
+Replacement:	'none'
+-------------------------------------------------------------
+[017] Suffix:	'ázio'
+Min. stem size:	3
+Replacement:	'none'
+Exceptions:	1
+		01: 'topázio'
+-------------------------------------------------------------
+[018] Suffix:	'arraz'
+Min. stem size:	4
+Replacement:	'none'
+-------------------------------------------------------------
+[019] Suffix:	'zarrão'
+Min. stem size:	3
+Replacement:	'none'
+-------------------------------------------------------------
+[020] Suffix:	'arrão'
+Min. stem size:	4
+Replacement:	'none'
+-------------------------------------------------------------
+[021] Suffix:	'arra'
+Min. stem size:	3
+Replacement:	'none'
+-------------------------------------------------------------
+[022] Suffix:	'zão'
+Min. stem size:	2
+Replacement:	'none'
+Exceptions:	1
+		01: 'coalizão'
+-------------------------------------------------------------
+[023] Suffix:	'ão'
+Min. stem size:	3
+Replacement:	'none'
+Exceptions:	43
+		01: 'camarão'
+		02: 'chimarrão'
+		03: 'canção'
+		04: 'coração'
+		05: 'embrião'
+		06: 'grotão'
+		07: 'glutão'
+		08: 'ficção'
+		09: 'fogão'
+		10: 'feição'
+		11: 'furacão'
+		12: 'gamão'
+		13: 'lampião'
+		14: 'leão'
+		15: 'macacão'
+		16: 'nação'
+		17: 'órfão'
+		18: 'orgão'
+		19: 'patrão'
+		20: 'portão'
+		21: 'quinhão'
+		22: 'rincão'
+		23: 'tração'
+		24: 'falcão'
+		25: 'espião'
+		26: 'mamão'
+		27: 'folião'
+		28: 'cordão'
+		29: 'aptidão'
+		30: 'campeão'
+		31: 'colchão'
+		32: 'limão'
+		33: 'leilão'
+		34: 'melão'
+		35: 'barão'
+		36: 'milhão'
+		37: 'bilhão'
+		38: 'fusão'
+		39: 'cristão'
+		40: 'ilusão'
+		41: 'capitão'
+		42: 'estação'
+		43: 'senão'
+=============================================================
+---------------------------------------------------------------------------------
+Structure allocate at 0x8363260, with 60 bytes
+Rule String: 'Noun'
+Rule name: Noun.
+Min. Word Size: 0.
+Exceptions compare: suffix only.
+Read 84 suffixes for this rule
+=============================================================
+Structure allocate @ 0x8363260
+Rule name:	 'Noun'
+Min. word size:	 0
+-------------------------------------------------------------
+[001] Suffix:	'encialista'
+Min. stem size:	4
+Replacement:	'none'
+-------------------------------------------------------------
+[002] Suffix:	'alista'
+Min. stem size:	5
+Replacement:	'none'
+-------------------------------------------------------------
+[003] Suffix:	'agem'
+Min. stem size:	3
+Replacement:	'none'
+Exceptions:	4
+		01: 'coragem'
+		02: 'chantagem'
+		03: 'vantagem'
+		04: 'carruagem'
+-------------------------------------------------------------
+[004] Suffix:	'iamento'
+Min. stem size:	4
+Replacement:	'none'
+-------------------------------------------------------------
+[005] Suffix:	'amento'
+Min. stem size:	3
+Replacement:	'none'
+Exceptions:	3
+		01: 'firmamento'
+		02: 'fundamento'
+		03: 'departamento'
+-------------------------------------------------------------
+[006] Suffix:	'imento'
+Min. stem size:	3
+Replacement:	'none'
+-------------------------------------------------------------
+[007] Suffix:	'mento'
+Min. stem size:	6
+Replacement:	'none'
+Exceptions:	5
+		01: 'firmamento'
+		02: 'elemento'
+		03: 'complemento'
+		04: 'instrumento'
+		05: 'departamento'
+-------------------------------------------------------------
+[008] Suffix:	'alizado'
+Min. stem size:	4
+Replacement:	'none'
+-------------------------------------------------------------
+[009] Suffix:	'atizado'
+Min. stem size:	4
+Replacement:	'none'
+-------------------------------------------------------------
+[010] Suffix:	'tizado'
+Min. stem size:	4
+Replacement:	'none'
+Exceptions:	1
+		01: 'alfabetizado'
+-------------------------------------------------------------
+[011] Suffix:	'izado'
+Min. stem size:	5
+Replacement:	'none'
+Exceptions:	2
+		01: 'organizado'
+		02: 'pulverizado'
+-------------------------------------------------------------
+[012] Suffix:	'ativo'
+Min. stem size:	4
+Replacement:	'none'
+Exceptions:	2
+		01: 'pejorativo'
+		02: 'relativo'
+-------------------------------------------------------------
+[013] Suffix:	'tivo'
+Min. stem size:	4
+Replacement:	'none'
+Exceptions:	1
+		01: 'relativo'
+-------------------------------------------------------------
+[014] Suffix:	'ivo'
+Min. stem size:	4
+Replacement:	'none'
+Exceptions:	4
+		01: 'passivo'
+		02: 'possessivo'
+		03: 'pejorativo'
+		04: 'positivo'
+-------------------------------------------------------------
+[015] Suffix:	'ado'
+Min. stem size:	2
+Replacement:	'none'
+Exceptions:	1
+		01: 'grado'
+-------------------------------------------------------------
+[016] Suffix:	'ido'
+Min. stem size:	3
+Replacement:	'none'
+Exceptions:	7
+		01: 'cândido'
+		02: 'consolido'
+		03: 'rápido'
+		04: 'decido'
+		05: 'tímido'
+		06: 'duvido'
+		07: 'marido'
+-------------------------------------------------------------
+[017] Suffix:	'ador'
+Min. stem size:	3
+Replacement:	'none'
+-------------------------------------------------------------
+[018] Suffix:	'edor'
+Min. stem size:	3
+Replacement:	'none'
+-------------------------------------------------------------
+[019] Suffix:	'idor'
+Min. stem size:	4
+Replacement:	'none'
+Exceptions:	1
+		01: 'ouvidor'
+-------------------------------------------------------------
+[020] Suffix:	'dor'
+Min. stem size:	4
+Replacement:	'none'
+Exceptions:	1
+		01: 'ouvidor'
+-------------------------------------------------------------
+[021] Suffix:	'sor'
+Min. stem size:	4
+Replacement:	'none'
+Exceptions:	1
+		01: 'assessor'
+-------------------------------------------------------------
+[022] Suffix:	'atoria'
+Min. stem size:	5
+Replacement:	'none'
+-------------------------------------------------------------
+[023] Suffix:	'tor'
+Min. stem size:	3
+Replacement:	'none'
+Exceptions:	7
+		01: 'benfeitor'
+		02: 'leitor'
+		03: 'editor'
+		04: 'pastor'
+		05: 'produtor'
+		06: 'promotor'
+		07: 'consultor'
+-------------------------------------------------------------
+[024] Suffix:	'or'
+Min. stem size:	2
+Replacement:	'none'
+Exceptions:	13
+		01: 'motor'
+		02: 'melhor'
+		03: 'redor'
+		04: 'rigor'
+		05: 'sensor'
+		06: 'tambor'
+		07: 'tumor'
+		08: 'assessor'
+		09: 'benfeitor'
+		10: 'pastor'
+		11: 'terior'
+		12: 'favor'
+		13: 'autor'
+-------------------------------------------------------------
+[025] Suffix:	'abilidade'
+Min. stem size:	5
+Replacement:	'none'
+-------------------------------------------------------------
+[026] Suffix:	'icionista'
+Min. stem size:	4
+Replacement:	'none'
+-------------------------------------------------------------
+[027] Suffix:	'cionista'
+Min. stem size:	5
+Replacement:	'none'
+-------------------------------------------------------------
+[028] Suffix:	'ionista'
+Min. stem size:	5
+Replacement:	'none'
+-------------------------------------------------------------
+[029] Suffix:	'ionar'
+Min. stem size:	5
+Replacement:	'none'
+-------------------------------------------------------------
+[030] Suffix:	'ional'
+Min. stem size:	4
+Replacement:	'none'
+-------------------------------------------------------------
+[031] Suffix:	'ência'
+Min. stem size:	3
+Replacement:	'none'
+-------------------------------------------------------------
+[032] Suffix:	'ância'
+Min. stem size:	4
+Replacement:	'none'
+Exceptions:	1
+		01: 'ambulância'
+-------------------------------------------------------------
+[033] Suffix:	'edouro'
+Min. stem size:	3
+Replacement:	'none'
+-------------------------------------------------------------
+[034] Suffix:	'queiro'
+Min. stem size:	3
+Replacement:	'c'
+-------------------------------------------------------------
+[035] Suffix:	'adeiro'
+Min. stem size:	4
+Replacement:	'none'
+Exceptions:	1
+		01: 'desfiladeiro'
+-------------------------------------------------------------
+[036] Suffix:	'eiro'
+Min. stem size:	3
+Replacement:	'none'
+Exceptions:	3
+		01: 'desfiladeiro'
+		02: 'pioneiro'
+		03: 'mosteiro'
+-------------------------------------------------------------
+[037] Suffix:	'uoso'
+Min. stem size:	3
+Replacement:	'none'
+-------------------------------------------------------------
+[038] Suffix:	'oso'
+Min. stem size:	3
+Replacement:	'none'
+Exceptions:	1
+		01: 'precioso'
+-------------------------------------------------------------
+[039] Suffix:	'alizaç'
+Min. stem size:	5
+Replacement:	'none'
+-------------------------------------------------------------
+[040] Suffix:	'atizaç'
+Min. stem size:	5
+Replacement:	'none'
+-------------------------------------------------------------
+[041] Suffix:	'tizaç'
+Min. stem size:	5
+Replacement:	'none'
+-------------------------------------------------------------
+[042] Suffix:	'izaç'
+Min. stem size:	5
+Replacement:	'none'
+Exceptions:	1
+		01: 'organizaç'
+-------------------------------------------------------------
+[043] Suffix:	'aç'
+Min. stem size:	3
+Replacement:	'none'
+Exceptions:	2
+		01: 'equaç'
+		02: 'relaç'
+-------------------------------------------------------------
+[044] Suffix:	'iç'
+Min. stem size:	3
+Replacement:	'none'
+Exceptions:	1
+		01: 'eleição'
+-------------------------------------------------------------
+[045] Suffix:	'ário'
+Min. stem size:	3
+Replacement:	'none'
+Exceptions:	6
+		01: 'voluntário'
+		02: 'salário'
+		03: 'aniversário'
+		04: 'diário'
+		05: 'lionário'
+		06: 'armário'
+-------------------------------------------------------------
+[046] Suffix:	'atório'
+Min. stem size:	3
+Replacement:	'none'
+-------------------------------------------------------------
+[047] Suffix:	'rio'
+Min. stem size:	5
+Replacement:	'none'
+Exceptions:	9
+		01: 'voluntário'
+		02: 'salário'
+		03: 'aniversário'
+		04: 'diário'
+		05: 'compulsório'
+		06: 'lionário'
+		07: 'próprio'
+		08: 'stério'
+		09: 'armário'
+-------------------------------------------------------------
+[048] Suffix:	'ério'
+Min. stem size:	6
+Replacement:	'none'
+-------------------------------------------------------------
+[049] Suffix:	'ês'
+Min. stem size:	4
+Replacement:	'none'
+-------------------------------------------------------------
+[050] Suffix:	'eza'
+Min. stem size:	3
+Replacement:	'none'
+-------------------------------------------------------------
+[051] Suffix:	'ez'
+Min. stem size:	4
+Replacement:	'none'
+-------------------------------------------------------------
+[052] Suffix:	'esco'
+Min. stem size:	4
+Replacement:	'none'
+-------------------------------------------------------------
+[053] Suffix:	'ante'
+Min. stem size:	2
+Replacement:	'none'
+Exceptions:	6
+		01: 'gigante'
+		02: 'elefante'
+		03: 'adiante'
+		04: 'possante'
+		05: 'instante'
+		06: 'restaurante'
+-------------------------------------------------------------
+[054] Suffix:	'ástico'
+Min. stem size:	4
+Replacement:	'none'
+Exceptions:	1
+		01: 'eclesiástico'
+-------------------------------------------------------------
+[055] Suffix:	'alístico'
+Min. stem size:	3
+Replacement:	'none'
+-------------------------------------------------------------
+[056] Suffix:	'áutico'
+Min. stem size:	4
+Replacement:	'none'
+-------------------------------------------------------------
+[057] Suffix:	'êutico'
+Min. stem size:	4
+Replacement:	'none'
+-------------------------------------------------------------
+[058] Suffix:	'tico'
+Min. stem size:	3
+Replacement:	'none'
+Exceptions:	13
+		01: 'político'
+		02: 'eclesiástico'
+		03: 'diagnostico'
+		04: 'prático'
+		05: 'doméstico'
+		06: 'diagnóstico'
+		07: 'idêntico'
+		08: 'alopático'
+		09: 'artístico'
+		10: 'autêntico'
+		11: 'eclético'
+		12: 'crítico'
+		13: 'critico'
+-------------------------------------------------------------
+[059] Suffix:	'ico'
+Min. stem size:	4
+Replacement:	'none'
+Exceptions:	3
+		01: 'tico'
+		02: 'público'
+		03: 'explico'
+-------------------------------------------------------------
+[060] Suffix:	'ividade'
+Min. stem size:	5
+Replacement:	'none'
+-------------------------------------------------------------
+[061] Suffix:	'idade'
+Min. stem size:	4
+Replacement:	'none'
+Exceptions:	2
+		01: 'autoridade'
+		02: 'comunidade'
+-------------------------------------------------------------
+[062] Suffix:	'oria'
+Min. stem size:	4
+Replacement:	'none'
+Exceptions:	1
+		01: 'categoria'
+-------------------------------------------------------------
+[063] Suffix:	'encial'
+Min. stem size:	5
+Replacement:	'none'
+-------------------------------------------------------------
+[064] Suffix:	'ista'
+Min. stem size:	4
+Replacement:	'none'
+-------------------------------------------------------------
+[065] Suffix:	'auta'
+Min. stem size:	5
+Replacement:	'none'
+-------------------------------------------------------------
+[066] Suffix:	'quice'
+Min. stem size:	4
+Replacement:	'c'
+-------------------------------------------------------------
+[067] Suffix:	'ice'
+Min. stem size:	4
+Replacement:	'none'
+Exceptions:	1
+		01: 'cúmplice'
+-------------------------------------------------------------
+[068] Suffix:	'íaco'
+Min. stem size:	3
+Replacement:	'none'
+-------------------------------------------------------------
+[069] Suffix:	'ente'
+Min. stem size:	4
+Replacement:	'none'
+Exceptions:	6
+		01: 'freqüente'
+		02: 'alimente'
+		03: 'acrescente'
+		04: 'permanente'
+		05: 'oriente'
+		06: 'aparente'
+-------------------------------------------------------------
+[070] Suffix:	'ense'
+Min. stem size:	5
+Replacement:	'none'
+-------------------------------------------------------------
+[071] Suffix:	'inal'
+Min. stem size:	3
+Replacement:	'none'
+-------------------------------------------------------------
+[072] Suffix:	'ano'
+Min. stem size:	4
+Replacement:	'none'
+-------------------------------------------------------------
+[073] Suffix:	'ável'
+Min. stem size:	2
+Replacement:	'none'
+Exceptions:	4
+		01: 'afável'
+		02: 'razoável'
+		03: 'potável'
+		04: 'vulnerável'
+-------------------------------------------------------------
+[074] Suffix:	'ível'
+Min. stem size:	3
+Replacement:	'none'
+Exceptions:	1
+		01: 'possível'
+-------------------------------------------------------------
+[075] Suffix:	'vel'
+Min. stem size:	5
+Replacement:	'none'
+Exceptions:	3
+		01: 'possível'
+		02: 'vulnerável'
+		03: 'solúvel'
+-------------------------------------------------------------
+[076] Suffix:	'bil'
+Min. stem size:	3
+Replacement:	'vel'
+-------------------------------------------------------------
+[077] Suffix:	'ura'
+Min. stem size:	4
+Replacement:	'none'
+Exceptions:	3
+		01: 'imatura'
+		02: 'acupuntura'
+		03: 'costura'
+-------------------------------------------------------------
+[078] Suffix:	'ural'
+Min. stem size:	4
+Replacement:	'none'
+-------------------------------------------------------------
+[079] Suffix:	'ual'
+Min. stem size:	3
+Replacement:	'none'
+Exceptions:	4
+		01: 'bissexual'
+		02: 'virtual'
+		03: 'visual'
+		04: 'pontual'
+-------------------------------------------------------------
+[080] Suffix:	'ial'
+Min. stem size:	3
+Replacement:	'none'
+-------------------------------------------------------------
+[081] Suffix:	'al'
+Min. stem size:	4
+Replacement:	'none'
+Exceptions:	15
+		01: 'afinal'
+		02: 'animal'
+		03: 'estatal'
+		04: 'bissexual'
+		05: 'desleal'
+		06: 'fiscal'
+		07: 'formal'
+		08: 'pessoal'
+		09: 'liberal'
+		10: 'postal'
+		11: 'virtual'
+		12: 'visual'
+		13: 'pontual'
+		14: 'sideral'
+		15: 'sucursal'
+-------------------------------------------------------------
+[082] Suffix:	'alismo'
+Min. stem size:	4
+Replacement:	'none'
+-------------------------------------------------------------
+[083] Suffix:	'ivismo'
+Min. stem size:	4
+Replacement:	'none'
+-------------------------------------------------------------
+[084] Suffix:	'ismo'
+Min. stem size:	3
+Replacement:	'none'
+Exceptions:	1
+		01: 'cinismo'
+=============================================================
+---------------------------------------------------------------------------------
+Structure allocate at 0x837e810, with 60 bytes
+Rule String: 'Verb'
+Rule name: Verb.
+Min. Word Size: 0.
+Exceptions compare: suffix only.
+Read 101 suffixes for this rule
+=============================================================
+Structure allocate @ 0x837e810
+Rule name:	 'Verb'
+Min. word size:	 0
+-------------------------------------------------------------
+[001] Suffix:	'aríamo'
+Min. stem size:	2
+Replacement:	'none'
+-------------------------------------------------------------
+[002] Suffix:	'ássemo'
+Min. stem size:	2
+Replacement:	'none'
+-------------------------------------------------------------
+[003] Suffix:	'eríamo'
+Min. stem size:	2
+Replacement:	'none'
+-------------------------------------------------------------
+[004] Suffix:	'êssemo'
+Min. stem size:	2
+Replacement:	'none'
+-------------------------------------------------------------
+[005] Suffix:	'iríamo'
+Min. stem size:	3
+Replacement:	'none'
+-------------------------------------------------------------
+[006] Suffix:	'íssemo'
+Min. stem size:	3
+Replacement:	'none'
+-------------------------------------------------------------
+[007] Suffix:	'áramo'
+Min. stem size:	2
+Replacement:	'none'
+-------------------------------------------------------------
+[008] Suffix:	'árei'
+Min. stem size:	2
+Replacement:	'none'
+-------------------------------------------------------------
+[009] Suffix:	'aremo'
+Min. stem size:	2
+Replacement:	'none'
+-------------------------------------------------------------
+[010] Suffix:	'ariam'
+Min. stem size:	2
+Replacement:	'none'
+-------------------------------------------------------------
+[011] Suffix:	'aríei'
+Min. stem size:	2
+Replacement:	'none'
+-------------------------------------------------------------
+[012] Suffix:	'ássei'
+Min. stem size:	2
+Replacement:	'none'
+-------------------------------------------------------------
+[013] Suffix:	'assem'
+Min. stem size:	2
+Replacement:	'none'
+-------------------------------------------------------------
+[014] Suffix:	'ávamo'
+Min. stem size:	2
+Replacement:	'none'
+-------------------------------------------------------------
+[015] Suffix:	'êramo'
+Min. stem size:	3
+Replacement:	'none'
+-------------------------------------------------------------
+[016] Suffix:	'eremo'
+Min. stem size:	3
+Replacement:	'none'
+-------------------------------------------------------------
+[017] Suffix:	'eriam'
+Min. stem size:	3
+Replacement:	'none'
+-------------------------------------------------------------
+[018] Suffix:	'eríei'
+Min. stem size:	3
+Replacement:	'none'
+-------------------------------------------------------------
+[019] Suffix:	'êssei'
+Min. stem size:	3
+Replacement:	'none'
+-------------------------------------------------------------
+[020] Suffix:	'essem'
+Min. stem size:	3
+Replacement:	'none'
+-------------------------------------------------------------
+[021] Suffix:	'íramo'
+Min. stem size:	3
+Replacement:	'none'
+-------------------------------------------------------------
+[022] Suffix:	'iremo'
+Min. stem size:	3
+Replacement:	'none'
+-------------------------------------------------------------
+[023] Suffix:	'iriam'
+Min. stem size:	3
+Replacement:	'none'
+-------------------------------------------------------------
+[024] Suffix:	'iríei'
+Min. stem size:	3
+Replacement:	'none'
+-------------------------------------------------------------
+[025] Suffix:	'íssei'
+Min. stem size:	3
+Replacement:	'none'
+-------------------------------------------------------------
+[026] Suffix:	'issem'
+Min. stem size:	3
+Replacement:	'none'
+-------------------------------------------------------------
+[027] Suffix:	'ando'
+Min. stem size:	2
+Replacement:	'none'
+-------------------------------------------------------------
+[028] Suffix:	'endo'
+Min. stem size:	3
+Replacement:	'none'
+-------------------------------------------------------------
+[029] Suffix:	'indo'
+Min. stem size:	3
+Replacement:	'none'
+-------------------------------------------------------------
+[030] Suffix:	'ondo'
+Min. stem size:	3
+Replacement:	'none'
+-------------------------------------------------------------
+[031] Suffix:	'aram'
+Min. stem size:	2
+Replacement:	'none'
+-------------------------------------------------------------
+[032] Suffix:	'arão'
+Min. stem size:	2
+Replacement:	'none'
+-------------------------------------------------------------
+[033] Suffix:	'arde'
+Min. stem size:	2
+Replacement:	'none'
+-------------------------------------------------------------
+[034] Suffix:	'arei'
+Min. stem size:	2
+Replacement:	'none'
+-------------------------------------------------------------
+[035] Suffix:	'arem'
+Min. stem size:	2
+Replacement:	'none'
+-------------------------------------------------------------
+[036] Suffix:	'aria'
+Min. stem size:	2
+Replacement:	'none'
+-------------------------------------------------------------
+[037] Suffix:	'armo'
+Min. stem size:	2
+Replacement:	'none'
+-------------------------------------------------------------
+[038] Suffix:	'asse'
+Min. stem size:	2
+Replacement:	'none'
+-------------------------------------------------------------
+[039] Suffix:	'aste'
+Min. stem size:	2
+Replacement:	'none'
+-------------------------------------------------------------
+[040] Suffix:	'avam'
+Min. stem size:	2
+Replacement:	'none'
+Exceptions:	1
+		01: 'agravam'
+-------------------------------------------------------------
+[041] Suffix:	'ávei'
+Min. stem size:	2
+Replacement:	'none'
+-------------------------------------------------------------
+[042] Suffix:	'eram'
+Min. stem size:	3
+Replacement:	'none'
+-------------------------------------------------------------
+[043] Suffix:	'erão'
+Min. stem size:	3
+Replacement:	'none'
+-------------------------------------------------------------
+[044] Suffix:	'erde'
+Min. stem size:	3
+Replacement:	'none'
+-------------------------------------------------------------
+[045] Suffix:	'erei'
+Min. stem size:	3
+Replacement:	'none'
+-------------------------------------------------------------
+[046] Suffix:	'êrei'
+Min. stem size:	3
+Replacement:	'none'
+-------------------------------------------------------------
+[047] Suffix:	'erem'
+Min. stem size:	3
+Replacement:	'none'
+-------------------------------------------------------------
+[048] Suffix:	'eria'
+Min. stem size:	3
+Replacement:	'none'
+-------------------------------------------------------------
+[049] Suffix:	'ermo'
+Min. stem size:	3
+Replacement:	'none'
+-------------------------------------------------------------
+[050] Suffix:	'esse'
+Min. stem size:	3
+Replacement:	'none'
+-------------------------------------------------------------
+[051] Suffix:	'este'
+Min. stem size:	3
+Replacement:	'none'
+Exceptions:	2
+		01: 'faroeste'
+		02: 'agreste'
+-------------------------------------------------------------
+[052] Suffix:	'íamo'
+Min. stem size:	3
+Replacement:	'none'
+-------------------------------------------------------------
+[053] Suffix:	'iram'
+Min. stem size:	3
+Replacement:	'none'
+-------------------------------------------------------------
+[054] Suffix:	'íram'
+Min. stem size:	3
+Replacement:	'none'
+-------------------------------------------------------------
+[055] Suffix:	'irão'
+Min. stem size:	2
+Replacement:	'none'
+-------------------------------------------------------------
+[056] Suffix:	'irde'
+Min. stem size:	2
+Replacement:	'none'
+-------------------------------------------------------------
+[057] Suffix:	'irei'
+Min. stem size:	3
+Replacement:	'none'
+Exceptions:	1
+		01: 'admirei'
+-------------------------------------------------------------
+[058] Suffix:	'irem'
+Min. stem size:	3
+Replacement:	'none'
+Exceptions:	1
+		01: 'adquirem'
+-------------------------------------------------------------
+[059] Suffix:	'iria'
+Min. stem size:	3
+Replacement:	'none'
+-------------------------------------------------------------
+[060] Suffix:	'irmo'
+Min. stem size:	3
+Replacement:	'none'
+-------------------------------------------------------------
+[061] Suffix:	'isse'
+Min. stem size:	3
+Replacement:	'none'
+-------------------------------------------------------------
+[062] Suffix:	'iste'
+Min. stem size:	4
+Replacement:	'none'
+-------------------------------------------------------------
+[063] Suffix:	'iava'
+Min. stem size:	4
+Replacement:	'none'
+Exceptions:	1
+		01: 'ampliava'
+-------------------------------------------------------------
+[064] Suffix:	'amo'
+Min. stem size:	2
+Replacement:	'none'
+-------------------------------------------------------------
+[065] Suffix:	'iona'
+Min. stem size:	3
+Replacement:	'none'
+-------------------------------------------------------------
+[066] Suffix:	'ara'
+Min. stem size:	2
+Replacement:	'none'
+Exceptions:	2
+		01: 'arara'
+		02: 'prepara'
+-------------------------------------------------------------
+[067] Suffix:	'ará'
+Min. stem size:	2
+Replacement:	'none'
+Exceptions:	1
+		01: 'alvará'
+-------------------------------------------------------------
+[068] Suffix:	'are'
+Min. stem size:	2
+Replacement:	'none'
+Exceptions:	1
+		01: 'prepare'
+-------------------------------------------------------------
+[069] Suffix:	'ava'
+Min. stem size:	2
+Replacement:	'none'
+Exceptions:	1
+		01: 'agrava'
+-------------------------------------------------------------
+[070] Suffix:	'emo'
+Min. stem size:	2
+Replacement:	'none'
+-------------------------------------------------------------
+[071] Suffix:	'era'
+Min. stem size:	3
+Replacement:	'none'
+Exceptions:	2
+		01: 'acelera'
+		02: 'espera'
+-------------------------------------------------------------
+[072] Suffix:	'erá'
+Min. stem size:	3
+Replacement:	'none'
+-------------------------------------------------------------
+[073] Suffix:	'ere'
+Min. stem size:	3
+Replacement:	'none'
+Exceptions:	1
+		01: 'espere'
+-------------------------------------------------------------
+[074] Suffix:	'iam'
+Min. stem size:	3
+Replacement:	'none'
+Exceptions:	4
+		01: 'enfiam'
+		02: 'ampliam'
+		03: 'elogiam'
+		04: 'ensaiam'
+-------------------------------------------------------------
+[075] Suffix:	'íei'
+Min. stem size:	3
+Replacement:	'none'
+-------------------------------------------------------------
+[076] Suffix:	'imo'
+Min. stem size:	3
+Replacement:	'none'
+Exceptions:	6
+		01: 'reprimo'
+		02: 'intimo'
+		03: 'íntimo'
+		04: 'nimo'
+		05: 'queimo'
+		06: 'ximo'
+-------------------------------------------------------------
+[077] Suffix:	'ira'
+Min. stem size:	3
+Replacement:	'none'
+Exceptions:	2
+		01: 'fronteira'
+		02: 'sátira'
+-------------------------------------------------------------
+[078] Suffix:	'ído'
+Min. stem size:	3
+Replacement:	'none'
+-------------------------------------------------------------
+[079] Suffix:	'irá'
+Min. stem size:	0
+Replacement:	'none'
+-------------------------------------------------------------
+[080] Suffix:	'tizar'
+Min. stem size:	4
+Replacement:	'none'
+Exceptions:	1
+		01: 'alfabetizar'
+-------------------------------------------------------------
+[081] Suffix:	'izar'
+Min. stem size:	5
+Replacement:	'none'
+Exceptions:	1
+		01: 'organizar'
+-------------------------------------------------------------
+[082] Suffix:	'itar'
+Min. stem size:	5
+Replacement:	'none'
+Exceptions:	3
+		01: 'acreditar'
+		02: 'explicitar'
+		03: 'estreitar'
+-------------------------------------------------------------
+[083] Suffix:	'ire'
+Min. stem size:	3
+Replacement:	'none'
+Exceptions:	1
+		01: 'adquire'
+-------------------------------------------------------------
+[084] Suffix:	'omo'
+Min. stem size:	3
+Replacement:	'none'
+-------------------------------------------------------------
+[085] Suffix:	'ai'
+Min. stem size:	2
+Replacement:	'none'
+-------------------------------------------------------------
+[086] Suffix:	'am'
+Min. stem size:	2
+Replacement:	'none'
+-------------------------------------------------------------
+[087] Suffix:	'ear'
+Min. stem size:	4
+Replacement:	'none'
+Exceptions:	2
+		01: 'alardear'
+		02: 'nuclear'
+-------------------------------------------------------------
+[088] Suffix:	'ar'
+Min. stem size:	2
+Replacement:	'none'
+Exceptions:	3
+		01: 'azar'
+		02: 'bazaar'
+		03: 'patamar'
+-------------------------------------------------------------
+[089] Suffix:	'uei'
+Min. stem size:	3
+Replacement:	'none'
+-------------------------------------------------------------
+[090] Suffix:	'uía'
+Min. stem size:	5
+Replacement:	'u'
+-------------------------------------------------------------
+[091] Suffix:	'ei'
+Min. stem size:	3
+Replacement:	'none'
+-------------------------------------------------------------
+[092] Suffix:	'guem'
+Min. stem size:	3
+Replacement:	'g'
+-------------------------------------------------------------
+[093] Suffix:	'em'
+Min. stem size:	2
+Replacement:	'none'
+Exceptions:	2
+		01: 'alem'
+		02: 'virgem'
+-------------------------------------------------------------
+[094] Suffix:	'er'
+Min. stem size:	2
+Replacement:	'none'
+Exceptions:	2
+		01: 'éter'
+		02: 'pier'
+-------------------------------------------------------------
+[095] Suffix:	'eu'
+Min. stem size:	3
+Replacement:	'none'
+Exceptions:	1
+		01: 'chapeu'
+-------------------------------------------------------------
+[096] Suffix:	'ia'
+Min. stem size:	3
+Replacement:	'none'
+Exceptions:	12
+		01: 'estória'
+		02: 'fatia'
+		03: 'acia'
+		04: 'praia'
+		05: 'elogia'
+		06: 'mania'
+		07: 'lábia'
+		08: 'aprecia'
+		09: 'polícia'
+		10: 'arredia'
+		11: 'cheia'
+		12: 'ásia'
+-------------------------------------------------------------
+[097] Suffix:	'ir'
+Min. stem size:	3
+Replacement:	'none'
+Exceptions:	1
+		01: 'freir'
+-------------------------------------------------------------
+[098] Suffix:	'iu'
+Min. stem size:	3
+Replacement:	'none'
+-------------------------------------------------------------
+[099] Suffix:	'eou'
+Min. stem size:	5
+Replacement:	'none'
+-------------------------------------------------------------
+[100] Suffix:	'ou'
+Min. stem size:	3
+Replacement:	'none'
+-------------------------------------------------------------
+[101] Suffix:	'i'
+Min. stem size:	3
+Replacement:	'none'
+=============================================================
+---------------------------------------------------------------------------------
+Structure allocate at 0x83a3c40, with 60 bytes
+Rule String: 'Vowel'
+Rule name: Vowel.
+Min. Word Size: 0.
+Exceptions compare: suffix only.
+Read 7 suffixes for this rule
+=============================================================
+Structure allocate @ 0x83a3c40
+Rule name:	 'Vowel'
+Min. word size:	 0
+-------------------------------------------------------------
+[001] Suffix:	'bil'
+Min. stem size:	2
+Replacement:	'vel'
+-------------------------------------------------------------
+[002] Suffix:	'gue'
+Min. stem size:	2
+Replacement:	'g'
+Exceptions:	2
+		01: 'gangue'
+		02: 'jegue'
+-------------------------------------------------------------
+[003] Suffix:	'á'
+Min. stem size:	3
+Replacement:	'none'
+-------------------------------------------------------------
+[004] Suffix:	'ê'
+Min. stem size:	3
+Replacement:	'none'
+Exceptions:	1
+		01: 'bebê'
+-------------------------------------------------------------
+[005] Suffix:	'a'
+Min. stem size:	3
+Replacement:	'none'
+Exceptions:	1
+		01: 'ásia'
+-------------------------------------------------------------
+[006] Suffix:	'e'
+Min. stem size:	3
+Replacement:	'none'
+-------------------------------------------------------------
+[007] Suffix:	'o'
+Min. stem size:	3
+Replacement:	'none'
+Exceptions:	1
+		01: 'ão'
+=============================================================

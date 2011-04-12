@@ -14,7 +14,7 @@ public class stopword {
 		if (args.length != 3) {
 			System.out.println();
 			System.out.println("Opcoes invalidas. Sintaxe correta:");
-			System.out.println("                  stopword <lista_stopwords> <arquivo_entrada>");
+			System.out.println("                  stopword <lista_stopwords> <arquivo_entrada> <arquivo_saida>");
 			System.out.println();
 			System.exit(1);
 		}
@@ -67,14 +67,20 @@ public class stopword {
 					token = token.replaceAll("[$%#`^~|(){}'\"*,]", " ")
 							.replaceAll("[!?:;]", ".");
 					
-					if (!hash_words.contains(token)){//retira enderecos web
+					if (!hash_words.contains(token)){//retira se esta na lista de stopwords
 						if (token.length() < 4 || (!(token.substring(0, 4).equalsIgnoreCase("http")) 
-								&& !(token.substring(0, 3).equalsIgnoreCase("www")))){
+								&& !(token.substring(0, 3).equalsIgnoreCase("www")))){//retira enderecos web
 							//System.out.print(token);
 							//System.out.print(" ");
 							output.write(token);
 							output.write(" ");
 						}//fim if retira enderecos web
+						else{
+							if(token.length() >= 4) {
+								output.write(".");
+								output.write(" ");
+							}
+						}
 					}//fim if testa se esta na lista stopwords
 					
 				}

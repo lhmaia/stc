@@ -46,14 +46,29 @@ int main (int argc, char **argv){
                     conta++;
                 }
                 //printf("%c", aux);
-            }
-            while (aux != '\n' && !feof(arquivo));
+            }while (aux != '\n' && !feof(arquivo));
             palavra[conta] = '\0';
 
+            //desprezando o nome do usuario a data e possivel informacao de
+            //retweet
+            char *tok;
+            tok = strtok(palavra, " ");   //usuario que postou
+            if(tok != NULL) fprintf(arqsaida, "%s ", tok);
+
+            tok = strtok(NULL, " ");      //data do tweet
+            if(tok != NULL) fprintf(arqsaida, "%s ", tok);
+
+
+            tok = strtok(NULL, " "); 
+            if (tok != NULL && strcmp(tok, "rt") == 0)  {
+                if(tok != NULL) fprintf(arqsaida, "%s ", tok);
+                tok = strtok(NULL, " ");       //nome do usuario que teve post retwitado 
+                if(tok != NULL) fprintf(arqsaida, "%s ", tok);
+                tok = strtok(NULL, " "); 
+            }
+            
 
             //trabalhando cada token da linha
-            char *tok;
-            tok = strtok(palavra, " "); 
             
             while(tok != NULL){
                 rslpProcessWord(tok, &rslpMainStruct);
@@ -64,8 +79,7 @@ int main (int argc, char **argv){
             //fscanf(arquivo, "%s", palavra);
             //intf("%s", palavra);
             fprintf(arqsaida, "\n");
-        }
-        while (!feof(arquivo));
+        }while (!feof(arquivo));
     }
     else{
         printf("Nao foi possivel ler o arquivo %s\n", nomearq);

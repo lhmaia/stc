@@ -32,7 +32,14 @@ void Reader::readDocument(){
 
 		set<tipo_termo, comp_tipotermo> termos_doc;
 
-		char *frase = strtok(docaux, ".;?!");
+		//nome de usuario data e informacao de retweet
+		strtok(docaux, " ");    //nome de usuario
+		strtok(NULL, " ");      //data do tweet
+		char *auxTok = strtok(NULL, " ");      //nome de usuario
+
+		if (auxTok != NULL && strcmp(auxTok, "rt") == 0) strtok(NULL, " ");
+
+		char *frase = strtok(NULL, ".;?!");
 
 
 

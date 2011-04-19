@@ -9,8 +9,7 @@
 #define STC_H_
 
 #define MIN_DOCS_CLUSTER 2
-#define N_RELEVANTES 1000
-#define NOME_ARQUIVO_PRINCIPAL "fonte_dados.txt"
+#define N_RELEVANTES 500
 
 #define VERB if(verbose)
 

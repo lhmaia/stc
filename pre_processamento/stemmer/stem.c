@@ -53,17 +53,17 @@ int main (int argc, char **argv){
             //retweet
             char *tok;
             tok = strtok(palavra, " ");   //usuario que postou
-            if(tok != NULL) fprintf(arqsaida, "%s ", tok);
+           //nao imprime: if(tok != NULL) fprintf(arqsaida, "%s ", tok);
 
             tok = strtok(NULL, " ");      //data do tweet
-            if(tok != NULL) fprintf(arqsaida, "%s ", tok);
+            //nao imprime: if(tok != NULL) fprintf(arqsaida, "%s ", tok);
 
 
             tok = strtok(NULL, " "); 
             if (tok != NULL && strcmp(tok, "rt") == 0)  {
-                if(tok != NULL) fprintf(arqsaida, "%s ", tok);
+                //nao imprime: if(tok != NULL) fprintf(arqsaida, "%s ", tok);
                 tok = strtok(NULL, " ");       //nome do usuario que teve post retwitado 
-                if(tok != NULL) fprintf(arqsaida, "%s ", tok);
+                //nao imprime: if(tok != NULL) fprintf(arqsaida, "%s ", tok);
                 tok = strtok(NULL, " "); 
             }
             

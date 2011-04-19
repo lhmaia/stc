@@ -26,6 +26,7 @@ class Reader{
 		void readDocument();
 	private:
 		string path;
+		string arquivo_original;
 };
 
 #endif /* READER_H_ */

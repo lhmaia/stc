@@ -352,7 +352,9 @@ void inserir_frase (string frase, int doc, set <tipo_termo, comp_tipotermo> &set
 
 	//dividindo a frase em palavras
 	size_t found = 0;
+	size_t found_origin = 0;
 	size_t pos = 0;
+	size_t pos_origin = 0;
 
 	Edge::primeirotermo = Edge::termos.size();
 
@@ -376,7 +378,29 @@ void inserir_frase (string frase, int doc, set <tipo_termo, comp_tipotermo> &set
 		}
 		pos = found + 1;
 	}
+	/*
+	//dividindo frase original em palavras
+	while(found != string::npos){
+			found = frase.find(" ", found + 1);
+			string tmp = frase.substr(pos, found - pos);
 
+			size_t n = tmp.find_first_of(' ');
+			while(n != string::npos){
+				tmp.erase(n, 1);
+				n = tmp.find_first_of(' ');
+			}
+
+			if (tmp.size() > 0){
+				Edge::termos.push_back(tmp);
+				Edge::termos_to_walk.insert(tmp);
+
+				tipo_termo termotmp(tmp);
+				set_termos_doc.insert(termotmp);
+				//cout << frase.substr(pos, found - pos) << endl;
+			}
+			pos = found + 1;
+		}
+	*/
 	//inserindo termo em um conjunto de termos deste documento
 
 	Edge::N = Edge::termos.size() - 1;

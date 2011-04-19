@@ -9,16 +9,21 @@
 
 Reader::Reader(string Path){
 	path = Path;
+	arquivo_original = "/home/luizhenrique/workspace/stc/src/teste_origin.txt";
 }
 
 void Reader::readDocument(){
 	ifstream stream_doc(path.c_str(), ios::in);
-	if (!stream_doc.is_open()) {
+	ifstream stream_doc_origin(arquivo_original.c_str(), ios::in);
+
+	if (!stream_doc.is_open() || !stream_doc_origin.is_open()) {
 		cout << "arquivo nao encontrado." << endl;
 		exit(1);
 	}
 	string document;
+	string document_origin;
 	getline(stream_doc, document);
+	getline(stream_doc_origin, document_origin);
 
 	//gerando pesos para a funcao hash da arvore de sufixos
 	Edge::GeraPesos (Edge::p);
@@ -27,26 +32,43 @@ void Reader::readDocument(){
 
 	while(!stream_doc.eof()){
 		char docaux [document.size()];
+		char docaux_origin[document_origin.size()];
 		clust::documents.push_back(document);
+
 		strcpy(docaux, document.c_str());
+		strcpy(docaux_origin, document_origin.c_str());
 
 		set<tipo_termo, comp_tipotermo> termos_doc;
 
 		//nome de usuario data e informacao de retweet
-		strtok(docaux, " ");    //nome de usuario
-		strtok(NULL, " ");      //data do tweet
-		char *auxTok = strtok(NULL, " ");      //nome de usuario
+		/*cout << strtok(docaux_origin, " ") << endl;    //nome de usuario
 
-		if (auxTok != NULL && strcmp(auxTok, "rt") == 0) strtok(NULL, " ");
+		cout << strtok(NULL, " ") << endl;      //data do tweet
+		char *auxTok = strtok(NULL, " ");      //rt
 
+		if (auxTok != NULL && strcmp(auxTok, "rt") == 0) {
+			cout << "passou aqui" << endl;
+			strtok(NULL, " ");
+		}
+		cout << auxTok << endl;
 		char *frase = strtok(NULL, ".;?!");
+		vector<string> tmp_frases;
+		cout << frase << endl;
+		while (frase != NULL){
+			if(frase != NULL) tmp_frases.push_back(frase);
+			frase = strtok(NULL, ".;?!");
+		}*/
 
-
-
+		char *frase = NULL;
+		frase = strtok(docaux, ".;?!");
+		int conta_frase = 0;
+		//cout << frase << endl;
 		while(frase != NULL){
+			//cout << tmp_frases.size() << " " << conta_frase << endl;
 			if (frase != NULL) inserir_frase(frase, doc, termos_doc);
 			//cout << frase << endl;
 			frase = strtok(NULL, ".;?!");
+			conta_frase++;
 			conta++;
 
 		}

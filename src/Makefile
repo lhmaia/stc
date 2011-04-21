@@ -4,7 +4,7 @@ CFLAGS = -Wall -g
 
 RM = rm -f
 
-OBJS = main.o reader.o stree.o STC.o
+OBJS = main.o reader.o stree.o STC.o usuario.o
 
 MAIN = stc
 

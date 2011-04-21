@@ -15,6 +15,7 @@
 
 #include "STC.h"
 #include "stree.h"
+#include "usuario.h"
 
 
 
@@ -27,6 +28,10 @@ class Reader{
 	private:
 		string path;
 		string arquivo_original;
+
+
+		static vector<pair<set<Usuario, comp_usuario>::iterator, bool> > lista_usu_doc;
+		static set <Usuario, comp_usuario> lista_usuarios;
 };
 
 #endif /* READER_H_ */

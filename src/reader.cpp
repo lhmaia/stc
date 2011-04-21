@@ -7,6 +7,9 @@
 
 #include "reader.h"
 
+vector<pair<set<Usuario>::iterator, bool> > Reader::lista_usu_doc;
+set <Usuario, comp_usuario> Reader::lista_usuarios;
+
 Reader::Reader(string Path){
 	path = Path;
 	arquivo_original = "/home/luizhenrique/workspace/stc/src/teste_origin.txt";
@@ -41,23 +44,23 @@ void Reader::readDocument(){
 		set<tipo_termo, comp_tipotermo> termos_doc;
 
 		//nome de usuario data e informacao de retweet
-		/*cout << strtok(docaux_origin, " ") << endl;    //nome de usuario
+		string usu = strtok(docaux_origin, " ");    //nome de usuario
+		Usuario user_tmp(usu);
 
-		cout << strtok(NULL, " ") << endl;      //data do tweet
+		//incluindo usuario na lista
+		pair<set<Usuario, comp_usuario>::iterator, bool> retorno;
+		retorno = lista_usuarios.insert(user_tmp);
+		lista_usu_doc.push_back(retorno);
+
+/*
+		strtok(NULL, " ") << endl;      //data do tweet
 		char *auxTok = strtok(NULL, " ");      //rt
 
 		if (auxTok != NULL && strcmp(auxTok, "rt") == 0) {
-			cout << "passou aqui" << endl;
 			strtok(NULL, " ");
 		}
-		cout << auxTok << endl;
-		char *frase = strtok(NULL, ".;?!");
-		vector<string> tmp_frases;
-		cout << frase << endl;
-		while (frase != NULL){
-			if(frase != NULL) tmp_frases.push_back(frase);
-			frase = strtok(NULL, ".;?!");
-		}*/
+*/
+
 
 		char *frase = NULL;
 		frase = strtok(docaux, ".;?!");
@@ -77,7 +80,6 @@ void Reader::readDocument(){
 		pair <set<tipo_termo, comp_tipotermo>::iterator, bool > aux;
 		//inserindo o termo no conjunto geral de termos e contando o numero de documentos onde aparece
 		for(set<tipo_termo, comp_tipotermo>::iterator itermo = termos_doc.begin(); itermo != termos_doc.end(); itermo++){
-
 			aux = Edge::conjunto_termos.insert(*itermo);
 			if(aux.second == false) {
 
@@ -92,43 +94,28 @@ void Reader::readDocument(){
 		doc++;
 
 		getline(stream_doc, document);
+		getline(stream_doc_origin, document_origin);
 	}
 	//dump_edges(Edge::N);
 	//walk_tree(0, 0, 0);
+	cout << "====================================" << endl;
+	cout << "lista de usuarios:" << endl << endl;
 
-	return;
-
-	cout << endl << "****** CONJUNTO DE TERMOS *******" << endl;
-	for(set<tipo_termo>::iterator itermo = Edge::conjunto_termos.begin(); itermo != Edge::conjunto_termos.end(); itermo++){
-		cout << (*itermo).termo << " - " << (*itermo).numdocs << endl;
+	int usu = 1;
+	for(set<Usuario, comp_usuario>::iterator it = lista_usuarios.begin(); it != lista_usuarios.end(); it++){
+		cout << usu << " " << (*it).nome << endl;
+		usu++;
 	}
-	cout << "-----------------------------------" << endl;
+	cout << "====================================" << endl;
 
-	clust::Calculo_Score(clust::baseclusters);
+	cout << "====================================" << endl;
 
-	//ordenando os clusters por valor do score
-	clust::ordena_clusters(clust::baseclusters);
-
-	cout << endl << "***** Imprimindo Base Clusters *****" << endl;
-
-	cout << "Numero de base clusters: " << clust::baseclusters.size() << endl;
-
-	clust::imprime_clusters(50);
-
-
-	cout << endl << "--------------------------------------------------------" << endl;
-	cout << "SIMILARIDADE" << endl;
-	clust::merge_cluster();
-	cout << endl;
-
-	clust::Calculo_Score(clust::baseclusters);
-
-	//ordenando os clusters por valor do score
-	clust::ordena_clusters(clust::baseclusters);
-
-
-	cout << "Numero de clusters finais: " << clust::baseclusters.size() << endl;
-
-	clust::imprime_clusters(50);
+	cout << "lista de usuarios por doc:" << endl << endl;
+	usu = 1;
+	for(vector<pair<set<Usuario, comp_usuario>::iterator, bool> >::iterator it = lista_usu_doc.begin(); it < lista_usu_doc.end(); it++){
+		cout << usu << " " << (*(*it).first).nome << endl;
+		usu++;
+	}
+	cout << "====================================" << endl;
 
 }

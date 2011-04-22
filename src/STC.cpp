@@ -61,6 +61,37 @@ int clust::intersecao_doc (clust c1, clust c2){
 
 }
 
+int clust::intersecao_usu (clust c1, clust c2){
+	set<string> conj_c1;
+	set<string> conj_c2;
+
+	for(set<int>::iterator it = c1.documentos.begin(); it != c1.documentos.end(); it++){
+		conj_c1.insert(Reader::lista_usu_doc.at((*it) - 1).first->nome);
+	}
+
+	for(set<int>::iterator it = c2.documentos.begin(); it != c2.documentos.end(); it++){
+		conj_c2.insert(Reader::lista_usu_doc.at((*it) - 1).first->nome);
+	}
+
+	int intersecao = 0;
+	set<string>::iterator it1 = conj_c1.begin();
+	set<string>::iterator it2 = conj_c2.begin();
+
+	while(it1 != conj_c1.end() && it2 != conj_c2.end()){
+		if ((*it1).compare(*it2) == 0){
+			intersecao++;
+			it1++;
+			it2++;
+		}
+		else {
+			if ((*it1).compare(*it2) < 0) it1++;
+			else it2++;
+		}
+	}
+
+	return intersecao;
+}
+
 /*
 	 * dois clusters sao similares se
 	 * |intersecao| / |docs 1| > thresold e

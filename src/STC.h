@@ -98,6 +98,8 @@ public:
 	 */
 	static int intersecao_doc (clust c1, clust c2);
 
+	static int intersecao_usu (clust c1, clust c2);
+
 
 };
 

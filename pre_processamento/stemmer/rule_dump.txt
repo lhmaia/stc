@@ -1,5 +1,5 @@
 ---------------------------------------------------------------------------------
-Structure allocate at 0x1f58710, with 80 bytes
+Structure allocate at 0x9734478, with 60 bytes
 Rule String: 'Plural'
 Rule name: Plural.
 Min. Word Size: 3.
@@ -7,7 +7,7 @@ Exceptions compare: all word.
 	End Word Condition [1]: s.
 Read 11 suffixes for this rule
 =============================================================
-Structure allocate @ 0x1f58710
+Structure allocate @ 0x9734478
 Rule name:	 'Plural'
 Min. word size:	 3
 [01] End Word: 's'
@@ -95,7 +95,7 @@ Exceptions:	22
 		22: 'messias'
 =============================================================
 ---------------------------------------------------------------------------------
-Structure allocate at 0x1f59270, with 80 bytes
+Structure allocate at 0x9735d18, with 60 bytes
 Rule String: 'Feminine'
 Rule name: Feminine.
 Min. Word Size: 3.
@@ -104,7 +104,7 @@ Exceptions compare: all word.
 	End Word Condition [2]: ã.
 Read 15 suffixes for this rule
 =============================================================
-Structure allocate @ 0x1f59270
+Structure allocate @ 0x9735d18
 Rule name:	 'Feminine'
 Min. word size:	 3
 [01] End Word: 'a'
@@ -243,14 +243,14 @@ Exceptions:	4
 		04: 'divã'
 =============================================================
 ---------------------------------------------------------------------------------
-Structure allocate at 0x1f5fc00, with 80 bytes
+Structure allocate at 0x97370b0, with 60 bytes
 Rule String: 'Adverb'
 Rule name: Adverb.
 Min. Word Size: 0.
 Exceptions compare: suffix only.
 Read 1 suffixes for this rule
 =============================================================
-Structure allocate @ 0x1f5fc00
+Structure allocate @ 0x97370b0
 Rule name:	 'Adverb'
 Min. word size:	 0
 -------------------------------------------------------------
@@ -261,14 +261,14 @@ Exceptions:	1
 		01: 'experimente'
 =============================================================
 ---------------------------------------------------------------------------------
-Structure allocate at 0x1f5fc80, with 80 bytes
+Structure allocate at 0x973b7b8, with 60 bytes
 Rule String: 'Augmentative'
 Rule name: Augmentative.
 Min. Word Size: 0.
 Exceptions compare: all word.
 Read 23 suffixes for this rule
 =============================================================
-Structure allocate @ 0x1f5fc80
+Structure allocate @ 0x973b7b8
 Rule name:	 'Augmentative'
 Min. word size:	 0
 -------------------------------------------------------------
@@ -418,14 +418,14 @@ Exceptions:	43
 		43: 'senão'
 =============================================================
 ---------------------------------------------------------------------------------
-Structure allocate at 0x1f5fd00, with 80 bytes
+Structure allocate at 0x9737260, with 60 bytes
 Rule String: 'Noun'
 Rule name: Noun.
 Min. Word Size: 0.
 Exceptions compare: suffix only.
 Read 84 suffixes for this rule
 =============================================================
-Structure allocate @ 0x1f5fd00
+Structure allocate @ 0x9737260
 Rule name:	 'Noun'
 Min. word size:	 0
 -------------------------------------------------------------
@@ -947,14 +947,14 @@ Exceptions:	1
 		01: 'cinismo'
 =============================================================
 ---------------------------------------------------------------------------------
-Structure allocate at 0x1f747b0, with 80 bytes
+Structure allocate at 0x9752810, with 60 bytes
 Rule String: 'Verb'
 Rule name: Verb.
 Min. Word Size: 0.
 Exceptions compare: suffix only.
 Read 101 suffixes for this rule
 =============================================================
-Structure allocate @ 0x1f747b0
+Structure allocate @ 0x9752810
 Rule name:	 'Verb'
 Min. word size:	 0
 -------------------------------------------------------------
@@ -1443,14 +1443,14 @@ Min. stem size:	3
 Replacement:	'none'
 =============================================================
 ---------------------------------------------------------------------------------
-Structure allocate at 0x1f9e390, with 80 bytes
+Structure allocate at 0x9777c40, with 60 bytes
 Rule String: 'Vowel'
 Rule name: Vowel.
 Min. Word Size: 0.
 Exceptions compare: suffix only.
 Read 7 suffixes for this rule
 =============================================================
-Structure allocate @ 0x1f9e390
+Structure allocate @ 0x9777c40
 Rule name:	 'Vowel'
 Min. word size:	 0
 -------------------------------------------------------------

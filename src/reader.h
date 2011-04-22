@@ -26,11 +26,14 @@ class Reader{
 		Reader(string Path);
 		void readDocument();
 		static string arquivo_original;
-	private:
-		string path;
 
 		static vector<pair<set<Usuario, comp_usuario>::iterator, bool> > lista_usu_doc;
 		static set <Usuario, comp_usuario> lista_usuarios;
+
+	private:
+		string path;
+
+
 };
 
 #endif /* READER_H_ */

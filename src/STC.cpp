@@ -313,10 +313,13 @@ void clust::processa_label(){
 
 
 void clust::imprime_clusters(int n){
+
+	if (n <= 0) return;
+
+	ifstream stream_doc_origin (Reader::arquivo_original.c_str(), ios::in);
+
 	for (vector<clust>::iterator it = clust::baseclusters.begin(); it < clust::baseclusters.end() && it < (clust::baseclusters.begin() + n); it++){
 		if ((*it).tamanho_sufixo() >= 1){
-
-			//ifstream
 
 			cout << "Label: " << (*it).label << endl;
 
@@ -327,18 +330,29 @@ void clust::imprime_clusters(int n){
 			cout << " Score: " << (*it).score << endl;
 
 			cout << "Numero de documentos onde aparece: " << (*it).numero_documentos() << endl;
-			
+
 			//imprimindo os documentos
 			VERB
 			{
 			cout << "==============================================================================" << endl;
+
 			for (set<int>::iterator in = (*it).documentos.begin(); in != (*it).documentos.end(); in++){
+				int contalinha = 1;
 				cout << *in << endl;
 				cout << documents.at(*in - 1) << endl;
+
+				string documento;
+				while (contalinha <= *in){
+					getline(stream_doc_origin, documento);
+					contalinha++;
+				}
+				cout << documento << endl;
+				stream_doc_origin.seekg(0, ios::beg);
+
 			};
 			cout << "==============================================================================" << endl;
 			}
-			
+
 			//imprimindo sufixo
 			for (unsigned int t = 0; t < (*it).first_char_index.size(); t++){
 				//cout << "Sufixo de " << (*it).first_char_index.at(t) << " de tamanho " << (*it).tam_sufixo.at(t) << endl;
@@ -349,6 +363,7 @@ void clust::imprime_clusters(int n){
 			cout << endl << "-------------------------------" << endl;
 		}
 	}
+	stream_doc_origin.close();
 }
 
 void clust::processa_clusters(float Threshold){

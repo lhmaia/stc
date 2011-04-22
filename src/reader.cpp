@@ -7,6 +7,8 @@
 
 #include "reader.h"
 
+string Reader::arquivo_original;
+
 vector<pair<set<Usuario>::iterator, bool> > Reader::lista_usu_doc;
 set <Usuario, comp_usuario> Reader::lista_usuarios;
 

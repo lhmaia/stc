@@ -19,6 +19,7 @@
 #include <vector>
 #include <algorithm>
 #include "stree.h"
+#include "reader.h"
 
 using namespace std;
 

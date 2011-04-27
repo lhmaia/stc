@@ -8,15 +8,21 @@
 
 int main (int argc, char **argv){
 
-    if (argc < 3) {
+    if (argc < 4) {
         printf("\nNumero de parametros incorretos.\n");
         printf("Utilize: \n");
-        printf("./stem arquivo_entrada arquivo_saida\n\n");
+        printf("./stem arquivo_entrada arquivo_saida t/w\n\n");
         return (1);
     }
 
     char *nomearq = argv[1];
     char *nomearqsaida = argv[2];
+    char *tipo_entrada = argv[3];
+
+    if (strcmp(tipo_entrada, "t") && strcmp(tipo_entrada, "w")) {
+    	printf("O terceiro parametro deve ser: t para entrada do Twitter ou w para entrada da Wikipedia\n");
+    	return (1);
+    }
 
     rslpLoadStemmer(&rslpMainStruct, "rslpconfig.txt");
 
@@ -49,24 +55,34 @@ int main (int argc, char **argv){
             }while (aux != '\n' && !feof(arquivo));
             palavra[conta] = '\0';
 
-            //desprezando o nome do usuario a data e possivel informacao de
-            //retweet
             char *tok;
-            tok = strtok(palavra, " ");   //usuario que postou
-           //nao imprime: if(tok != NULL) fprintf(arqsaida, "%s ", tok);
+            if (strcmp(tipo_entrada, "t") == 0){
+				//desprezando o nome do usuario a data e possivel informacao de
+				//retweet
 
-            tok = strtok(NULL, " ");      //data do tweet
-            //nao imprime: if(tok != NULL) fprintf(arqsaida, "%s ", tok);
+				tok = strtok(palavra, " ");   //usuario que postou
+			   //nao imprime: if(tok != NULL) fprintf(arqsaida, "%s ", tok);
+
+				tok = strtok(NULL, " ");      //data do tweet
+				//nao imprime: if(tok != NULL) fprintf(arqsaida, "%s ", tok);
 
 
-            tok = strtok(NULL, " "); 
-            if (tok != NULL && strcmp(tok, "rt") == 0)  {
-                //nao imprime: if(tok != NULL) fprintf(arqsaida, "%s ", tok);
-                tok = strtok(NULL, " ");       //nome do usuario que teve post retwitado 
-                //nao imprime: if(tok != NULL) fprintf(arqsaida, "%s ", tok);
-                tok = strtok(NULL, " "); 
+				tok = strtok(NULL, " ");
+				if (tok != NULL && strcmp(tok, "rt") == 0)  {
+					//nao imprime: if(tok != NULL) fprintf(arqsaida, "%s ", tok);
+					tok = strtok(NULL, " ");       //nome do usuario que teve post retwitado
+					//nao imprime: if(tok != NULL) fprintf(arqsaida, "%s ", tok);
+					tok = strtok(NULL, " ");
+				}
             }
             
+            if (strcmp(tipo_entrada, "w") == 0){
+            	//desprezando links no inicio do artigo
+            	strtok(palavra, ">");
+            	strtok(NULL, ">");
+            	tok = strtok(NULL, " ");
+
+            }
 
             //trabalhando cada token da linha
             

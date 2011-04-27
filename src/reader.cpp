@@ -45,7 +45,7 @@ void Reader::readDocument(){
 
 		set<tipo_termo, comp_tipotermo> termos_doc;
 
-		//nome de usuario data e informacao de retweet
+		//nome de usuario, data e informacao de retweet
 		string usu = strtok(docaux_origin, " ");    //nome de usuario
 		Usuario user_tmp(usu);
 

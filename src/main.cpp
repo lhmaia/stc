@@ -69,7 +69,6 @@ int main(int argc, char** argv)
 	Reader r (input_file_name);
 	r.readDocument();
 
-
 	//execucao do processamento dos clusters
 
 	clust::processa_clusters(threshold);

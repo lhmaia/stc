@@ -62,6 +62,12 @@ int clust::intersecao_doc (clust c1, clust c2){
 }
 
 int clust::intersecao_usu (clust c1, clust c2){
+	/*
+	 * PROXIMO PASSO - TRANSFORMAR INTERSECAO EM JACCARD
+	 * JACCARD VARIA DE 0 A 1
+	 * NA SIMILARIDADE FAZER FORMULA CONSIDERANDO PESOS
+	 */
+
 	set<string> conj_c1;
 	set<string> conj_c2;
 

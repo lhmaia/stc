@@ -14,7 +14,7 @@ set <Usuario, comp_usuario> Reader::lista_usuarios;
 
 Reader::Reader(string Path){
 	path = Path;
-	arquivo_original = "/home/luizhenrique/workspace/stc/src/teste_origin.txt";
+	arquivo_original = "/var/tmp/conteudo_300K.txt";
 }
 
 void Reader::readDocument(){
@@ -43,6 +43,8 @@ void Reader::readDocument(){
 		strcpy(docaux, document.c_str());
 		strcpy(docaux_origin, document_origin.c_str());
 
+		//cout << docaux_origin << endl;
+
 		set<tipo_termo, comp_tipotermo> termos_doc;
 
 		//nome de usuario, data e informacao de retweet
@@ -67,7 +69,7 @@ void Reader::readDocument(){
 		char *frase = NULL;
 		frase = strtok(docaux, ".;?!");
 		int conta_frase = 0;
-		//cout << frase << endl;
+
 		while(frase != NULL){
 			//cout << tmp_frases.size() << " " << conta_frase << endl;
 			if (frase != NULL) inserir_frase(frase, doc, termos_doc);

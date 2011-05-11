@@ -8,7 +8,7 @@
 #ifndef USUARIO_H_
 #define USUARIO_H_
 
-#define M 				1097
+#define M 				95429
 #define MAX_LENGTH 		16 		//tamanho maximo de nome de usuario no twitter
 #define TAM_VEC_USU 	100000
 

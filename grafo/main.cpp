@@ -34,8 +34,8 @@ int main(){
 		strcpy(docaux, linha.c_str());
 
 		//lendo o nome do usuario
-		nomeusuario = strtok(docaux, " ");
-		cout << conta << ": " << nomeusuario << endl;
+		nomeusuario = strtok(docaux, "	");
+		//cout << conta << ": " << nomeusuario << endl;
 
 		if (usuario::pesquisa_hash(nomeusuario) == NULL){
 			usuario usu_tmp(nomeusuario);
@@ -49,10 +49,10 @@ int main(){
 
 		//lendo o nome do seguidor
 		nomeusuario = strtok(NULL, " ");
-		cout << conta << ": " << nomeusuario << endl;
+		//cout << conta << ": " << nomeusuario << endl;
 
 		if (usuario::pesquisa_hash(nomeusuario) == NULL){
-			cout << "nao esta no hash" << endl;
+
 			usuario usu_tmp(nomeusuario);
 
 			usuario::usuarios[conta] = usu_tmp;

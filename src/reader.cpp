@@ -12,9 +12,9 @@ string Reader::arquivo_original;
 vector<pair<set<Usuario>::iterator, bool> > Reader::lista_usu_doc;
 set <Usuario, comp_usuario> Reader::lista_usuarios;
 
-Reader::Reader(string Path){
+Reader::Reader(string Path, string Path_origin){
 	path = Path;
-	arquivo_original = "/var/tmp/conteudo_300K.txt";
+	arquivo_original = Path_origin;
 }
 
 void Reader::readDocument(){
@@ -102,6 +102,7 @@ void Reader::readDocument(){
 	}
 	//dump_edges(Edge::N);
 	//walk_tree(0, 0, 0);
+	/*
 	cout << "====================================" << endl;
 	cout << "lista de usuarios:" << endl << endl;
 
@@ -121,5 +122,5 @@ void Reader::readDocument(){
 		usu++;
 	}
 	cout << "====================================" << endl;
-
+	*/
 }

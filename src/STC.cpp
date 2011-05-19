@@ -66,6 +66,7 @@ int clust::intersecao_usu (clust c1, clust c2){
 	 * PROXIMO PASSO - TRANSFORMAR INTERSECAO EM JACCARD
 	 * JACCARD VARIA DE 0 A 1
 	 * NA SIMILARIDADE FAZER FORMULA CONSIDERANDO PESOS
+	 * clustering coefficient
 	 */
 
 	set<string> conj_c1;
@@ -358,8 +359,10 @@ void clust::imprime_clusters(int n){
 	for (vector<clust>::iterator it = clust::baseclusters.begin(); it < clust::baseclusters.end() && it < (clust::baseclusters.begin() + n); it++){
 		if ((*it).tamanho_sufixo() >= 1){
 
-			cout << "Label: " << (*it).label << endl;
+			cout << (*it).label << endl;
+			cout << (*it).documentos.size() << endl;
 
+			/*
 			cout << "Nodos: ";
 
 			for (vector<int>::iterator in = (*it).nodo.begin(); in < (*it).nodo.end(); in++)
@@ -367,16 +370,17 @@ void clust::imprime_clusters(int n){
 			cout << " Score: " << (*it).score << endl;
 
 			cout << "Numero de documentos onde aparece: " << (*it).numero_documentos() << endl;
+			*/
 
 			//imprimindo os documentos
 			VERB
 			{
-			cout << "==============================================================================" << endl;
+			//cout << "==============================================================================" << endl;
 
 			for (set<int>::iterator in = (*it).documentos.begin(); in != (*it).documentos.end(); in++){
 				int contalinha = 1;
-				cout << *in << endl;
-				cout << documents.at(*in - 1) << endl;
+				//cout << *in << endl;
+				//cout << documents.at(*in - 1) << endl;
 
 				string documento;
 				while (contalinha <= *in){
@@ -387,10 +391,11 @@ void clust::imprime_clusters(int n){
 				stream_doc_origin.seekg(0, ios::beg);
 
 			};
-			cout << "==============================================================================" << endl;
+			//cout << "==============================================================================" << endl;
 			}
 
 			//imprimindo sufixo
+			/*
 			for (unsigned int t = 0; t < (*it).first_char_index.size(); t++){
 				//cout << "Sufixo de " << (*it).first_char_index.at(t) << " de tamanho " << (*it).tam_sufixo.at(t) << endl;
 				for (int i = (*it).first_char_index.at(t); i <= ((*it).tam_sufixo.at(t) + (*it).first_char_index.at(t) - 1); i++)
@@ -398,6 +403,8 @@ void clust::imprime_clusters(int n){
 				cout << "; " << endl;
 			}
 			cout << endl << "-------------------------------" << endl;
+			*/
+			//cout << "FIMDOC" << endl;
 		}
 	}
 	stream_doc_origin.close();

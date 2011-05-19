@@ -23,7 +23,7 @@ using namespace std;
 
 class Reader{
 	public:
-		Reader(string Path);
+		Reader(string Path, string Path_origin);
 		void readDocument();
 		static string arquivo_original;
 

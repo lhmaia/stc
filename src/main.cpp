@@ -18,27 +18,33 @@ int main(int argc, char** argv)
 	//cout << "tamanha de um edge: " << sizeof(Edge) << endl;
 
 	char *input_file_name = NULL;
+	char *input_file_origin = NULL;
 	int numtoprint = 0;
 	int numtostatistic = 0;
 	float threshold = 0.5;
 
 
 	// check the number of arguments
-	if (argc < 3)
+	if (argc < 5)
     {
-		cout << "./a.out -i <nome_arquivo>" << endl;
+		cout << "./a.out -i <nome_arquivo> -o <nome_arquivo_original>" << endl;
   	    exit(1);
     }
 
 	int option;
 	// loop to receive information from the command line
-    while ( (option = getopt (argc, argv, "i:t:p:d:v:")) != EOF )
+    while ( (option = getopt (argc, argv, "i:o:t:p:d:v:")) != EOF )
 	{
     	switch (option)
 		{
 			// input file
     	case 'i':
 	  	input_file_name = strdup(optarg);
+			break;
+
+			// arquivo original
+    	case 'o':
+		input_file_origin = strdup(optarg);
 			break;
 
 			//valor do threshold
@@ -66,7 +72,7 @@ int main(int argc, char** argv)
 		}
 	}
 
-	Reader r (input_file_name);
+	Reader r (input_file_name, input_file_origin);
 	r.readDocument();
 
 	//execucao do processamento dos clusters

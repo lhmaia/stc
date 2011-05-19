@@ -11,7 +11,7 @@
 
 int main(){
 
-	string nome_arq = "/var/tmp/rede_seguidores.csv";
+	string nome_arq = "/home/luizhenrique/Desktop/POC2/rede_seguidores.csv";
 
 	usuario::GeraPesos(usuario::p);
 
@@ -22,10 +22,13 @@ int main(){
 		exit(1);
 	}
 
+	//cout << sizeof(usuario) << endl; return 0;
+
 	string linha;
 	getline(stream_doc, linha);
 
-	int conta = 0;
+	unsigned long int conta = 0;
+	unsigned long int contalinha = 1;
 
 	while(!stream_doc.eof()){
 
@@ -47,24 +50,50 @@ int main(){
 			conta++;
 		}
 
+
+        //if(conta%100000 == 0) cout << '\r' << conta << " -  "  << contalinha << " - " << nomeusuario  << endl;
+
 		//lendo o nome do seguidor
 		nomeusuario = strtok(NULL, " ");
-		//cout << conta << ": " << nomeusuario << endl;
 
-		if (usuario::pesquisa_hash(nomeusuario) == NULL){
+		if (nomeusuario != NULL){
+			if (usuario::pesquisa_hash(nomeusuario) == NULL){
 
-			usuario usu_tmp(nomeusuario);
+				usuario usu_tmp(nomeusuario);
 
-			usuario::usuarios[conta] = usu_tmp;
+				usuario::usuarios[conta] = usu_tmp;
 
-			usuario::insere_hash(&(usuario::usuarios[conta]));
+				usuario::insere_hash(&(usuario::usuarios[conta]));
 
-			conta++;
+				conta++;
+			}
 		}
+
+		getline(stream_doc, linha);
+		contalinha++;
+	}
+
+	//retorna o arquivo para a primeira linha
+	stream_doc.seekg(0, ios::beg);
+
+	getline(stream_doc, linha);
+
+	conta = 0;
+
+	while(!stream_doc.eof()){
+
+		char *nomeusuario;
+		char docaux[linha.size() + 1];
+		strcpy(docaux, linha.c_str());
+
+		//while (usu)
 
 		getline(stream_doc, linha);
 	}
 
+	stream_doc.close();
+
+    getchar();
 
 	return 0;
 }

@@ -24,6 +24,8 @@ int main(){
 
 	//cout << sizeof(usuario) << endl; return 0;
 
+	cout << "Preenchendo Hash ..." << endl;
+
 	string linha;
 	getline(stream_doc, linha);
 
@@ -73,6 +75,8 @@ int main(){
 		contalinha++;
 	}
 
+	cout << "Preenchendo Grafo ..." << endl;
+
 	//retorna o arquivo para a primeira linha
 	stream_doc.seekg(0, ios::beg);
 
@@ -80,20 +84,47 @@ int main(){
 
 	conta = 0;
 
+	char *nomeusuario;
+	char docaux[MAX_LENGTH];
+	strcpy(docaux, linha.c_str());
+
+	nomeusuario = strtok(docaux, "	");
+
+	char aux [MAX_LENGTH];
+
 	while(!stream_doc.eof()){
 
-		char *nomeusuario;
-		char docaux[linha.size() + 1];
-		strcpy(docaux, linha.c_str());
+		while (usuario::usuarios[conta].nome.compare(nomeusuario) != 0){
+			conta++;
+		}
 
-		//while (usu)
+		do{
+			nomeusuario = strtok(NULL, "	");
+			usuario* usu =  usuario::pesquisa_hash(nomeusuario);
 
-		getline(stream_doc, linha);
+			if (usu == NULL)
+				cout << "Usuario nao encontrado" << endl;
+			else{
+				usuario::usuarios[conta].seguidores.push_back(usu);
+			}
+
+
+			strcpy(aux, nomeusuario);
+
+			getline(stream_doc, linha);
+			strcpy(docaux, linha.c_str());
+			nomeusuario = strtok(docaux, "	");
+
+		}while((strcmp(aux, nomeusuario) == 0) && !stream_doc.eof());
+
+		//getline(stream_doc, linha);
 	}
 
 	stream_doc.close();
 
     getchar();
+
+    cout << "TERMINOU OK" << endl;
 
 	return 0;
 }

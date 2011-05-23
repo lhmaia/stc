@@ -106,6 +106,7 @@ int main(){
 				cout << "Usuario nao encontrado" << endl;
 			else{
 				usuario::usuarios[conta].seguidores.push_back(usu);
+				usu->segue.push_back(&(usuario::usuarios[conta]));
 			}
 
 

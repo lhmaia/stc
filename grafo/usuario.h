@@ -30,6 +30,7 @@ public:
 
 	string nome;
 	vector <usuario*> seguidores;
+	vector <usuario*> segue;
 
 	//static vector<usuario> usuarios;
 	static usuario usuarios[TAM_VEC_USU];

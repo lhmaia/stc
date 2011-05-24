@@ -9,9 +9,18 @@
 #include "usuario.h"
 #include <string.h>
 
-int main(){
+int main(int argc, char** argv){
 
-	string nome_arq = "/home/luizhenrique/Desktop/POC2/rede_seguidores.csv";
+	if (argc < 1) {
+		cout << endl << "Numero de argumentos invalidos" << endl
+		           << "./graf <nome arquivo>" << endl;
+		return 1;
+	}
+
+
+	string nome_arq = argv[1];
+
+	cout << endl << "Processando arquivo: " << argv[1] << endl;
 
 	usuario::GeraPesos(usuario::p);
 
@@ -52,6 +61,8 @@ int main(){
 			conta++;
 		}
 
+		cout << nomeusuario << "-";
+
 
         //if(conta%100000 == 0) cout << '\r' << conta << " -  "  << contalinha << " - " << nomeusuario  << endl;
 
@@ -70,6 +81,8 @@ int main(){
 				conta++;
 			}
 		}
+
+		cout << nomeusuario << ",";
 
 		getline(stream_doc, linha);
 		contalinha++;
@@ -118,12 +131,11 @@ int main(){
 
 		}while((strcmp(aux, nomeusuario) == 0) && !stream_doc.eof());
 
-		//getline(stream_doc, linha);
 	}
 
 	stream_doc.close();
 
-    getchar();
+    //getchar();
 
     cout << "TERMINOU OK" << endl;
 

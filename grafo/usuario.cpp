@@ -59,3 +59,27 @@ void usuario::insere_hash (usuario* usu){
 	hash[indice].push_back(usu);
 }
 
+double usuario::calcula_coefficient (){
+	int interseccao = 0;
+	for (vector<usuario*>::iterator it = segue.begin(); it < segue.end(); it++){
+		if (contem_usu(*it, seguidores)) interseccao++;
+	}
+	int num_triplas = seguidores.size() + segue.size() - interseccao;
+
+	int num_triangulos = 0;
+	for (vector<usuario*>::iterator it = seguidores.begin(); it < seguidores.end(); it++){
+		if (contem_usu(*it, segue)) num_triangulos++;
+	}
+	if (num_triplas == 0) lcoefficient = 0;
+	else
+		lcoefficient = ( (double) num_triangulos ) / ( (double) num_triplas );
+
+	return lcoefficient;
+}
+
+bool usuario::contem_usu (usuario* usu, vector<usuario*> &lista){
+	for(vector<usuario*>::iterator it = lista.begin(); it < lista.end(); it++){
+		if ((*it)->nome.compare(usu->nome) == 0) return true;
+	}
+	return false;
+}

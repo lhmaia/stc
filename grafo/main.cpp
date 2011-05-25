@@ -61,7 +61,7 @@ int main(int argc, char** argv){
 			conta++;
 		}
 
-		cout << nomeusuario << "-";
+		//cout << nomeusuario << "-";
 
 
         //if(conta%100000 == 0) cout << '\r' << conta << " -  "  << contalinha << " - " << nomeusuario  << endl;
@@ -82,36 +82,42 @@ int main(int argc, char** argv){
 			}
 		}
 
-		cout << nomeusuario << ",";
+		//cout << nomeusuario << ",";
 
 		getline(stream_doc, linha);
 		contalinha++;
 	}
 
+	int numusuarios = conta;
+
 	cout << "Preenchendo Grafo ..." << endl;
 
 	//retorna o arquivo para a primeira linha
-	stream_doc.seekg(0, ios::beg);
+	stream_doc.close();
 
-	getline(stream_doc, linha);
+	ifstream stream_doc1 (nome_arq.c_str(), ios::in);
 
-	conta = 0;
+	getline(stream_doc1, linha);
+
+    conta = 0;
 
 	char *nomeusuario;
-	char docaux[MAX_LENGTH];
+	char docaux[MAX_LENGTH * 2 + 2];
 	strcpy(docaux, linha.c_str());
 
 	nomeusuario = strtok(docaux, "	");
 
 	char aux [MAX_LENGTH];
 
-	while(!stream_doc.eof()){
+	while(!stream_doc1.eof()){
 
 		while (usuario::usuarios[conta].nome.compare(nomeusuario) != 0){
 			conta++;
 		}
 
 		do{
+			strcpy(aux, nomeusuario);
+
 			nomeusuario = strtok(NULL, "	");
 			usuario* usu =  usuario::pesquisa_hash(nomeusuario);
 
@@ -122,18 +128,33 @@ int main(int argc, char** argv){
 				usu->segue.push_back(&(usuario::usuarios[conta]));
 			}
 
+			//cout << usuario::usuarios[conta].nome << "	" << nomeusuario << endl;
 
-			strcpy(aux, nomeusuario);
-
-			getline(stream_doc, linha);
+			getline(stream_doc1, linha);
 			strcpy(docaux, linha.c_str());
 			nomeusuario = strtok(docaux, "	");
 
-		}while((strcmp(aux, nomeusuario) == 0) && !stream_doc.eof());
+		}while(!stream_doc1.eof() && (strcmp(aux, nomeusuario) == 0));
 
 	}
 
-	stream_doc.close();
+	stream_doc1.close();
+
+
+	cout << "Calculando coeficientes locais ..." << endl;
+
+	double sum_ci = 0;
+
+	for(int it = 0; it < numusuarios; it++){
+		sum_ci += usuario::usuarios[it].calcula_coefficient();
+		cout << usuario::usuarios[it].lcoefficient << ", ";
+	}
+
+	cout << "Soma dos coeficientes locais: " << sum_ci << endl;
+
+	double cluster_coefficient = sum_ci / (double) numusuarios;
+
+	cout << endl << "Clustering Coefficient: " << cluster_coefficient << endl;
 
     //getchar();
 

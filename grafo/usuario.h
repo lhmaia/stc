@@ -32,6 +32,12 @@ public:
 	vector <usuario*> seguidores;
 	vector <usuario*> segue;
 
+	double lcoefficient;
+
+	double calcula_coefficient ();
+
+	bool contem_usu (usuario* usu, vector<usuario*> &lista);
+
 	//static vector<usuario> usuarios;
 	static usuario usuarios[TAM_VEC_USU];
 

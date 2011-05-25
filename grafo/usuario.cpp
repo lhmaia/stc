@@ -64,7 +64,10 @@ double usuario::calcula_coefficient (){
 	for (vector<usuario*>::iterator it = segue.begin(); it < segue.end(); it++){
 		if (contem_usu(*it, seguidores)) interseccao++;
 	}
-	int num_triplas = seguidores.size() + segue.size() - interseccao;
+	int num_triplas = (seguidores.size() * segue.size()) - interseccao;
+
+	if (num_triplas != 0)
+		cout << "passe aqui" << endl;
 
 	int num_triangulos = 0;
 	for (vector<usuario*>::iterator it = seguidores.begin(); it < seguidores.end(); it++){

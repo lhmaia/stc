@@ -61,7 +61,7 @@ int clust::intersecao_doc (clust c1, clust c2){
 
 }
 
-int clust::intersecao_usu (clust c1, clust c2){
+float clust::intersecao_usu (clust c1, clust c2){
 	/*
 	 * PROXIMO PASSO - TRANSFORMAR INTERSECAO EM JACCARD
 	 * JACCARD VARIA DE 0 A 1
@@ -96,7 +96,11 @@ int clust::intersecao_usu (clust c1, clust c2){
 		}
 	}
 
-	return intersecao;
+	int uniao = conj_c1.size() + conj_c2.size() - intersecao;
+
+	float jaccard = (float) intersecao / (float) uniao;
+
+	return jaccard;
 }
 
 /*
@@ -105,11 +109,24 @@ int clust::intersecao_usu (clust c1, clust c2){
 	 * |intersecao| / |docs 2| > thresold
 	 * neste caso retorna true
 	 */
-bool clust::similaridade (clust c1, clust c2){
+bool clust::similaridade (clust c1, clust c2, bool calcula_inter_usu){
 	int intersecao = intersecao_doc(c1, c2);
 	//cout << " intersecao: " << intersecao << " ";
-	bool comp1 = (( (float) intersecao )/( (float) c1.numero_documentos() )) > threshold;
-	bool comp2 = (( (float) intersecao )/( (float) c2.numero_documentos() )) > threshold;
+
+	bool comp1, comp2;
+	if (!calcula_inter_usu){
+		comp1 = (( (float) intersecao )/( (float) c1.numero_documentos() )) > threshold;
+		comp2 = (( (float) intersecao )/( (float) c2.numero_documentos() )) > threshold;
+	}
+	else{
+		float intersecaousu = intersecao_usu(c1, c2);
+		float valor1 = ( ( (float) intersecao )/( (float) c1.numero_documentos() ) + intersecaousu ) / 2;
+		float valor2 = ( ( (float) intersecao )/( (float) c2.numero_documentos() ) + intersecaousu ) / 2;
+
+		comp1 = valor1 > threshold;
+		comp2 = valor2 > threshold;
+
+	}
 
 	return (comp1 && comp2);
 }
@@ -175,10 +192,16 @@ void clust::merge_cluster (){
 	int externo = N_RELEVANTES;
 	int interno = N_RELEVANTES;
 	int comp = 0;
+	int ext = 0;
+	int inter = 0;
 	for (vector<clust>::iterator it1 = baseclusters.begin(); it1 < baseclusters.end() && it1 < (baseclusters.begin() + externo); it1++){
+		ext++;
 		for (vector<clust>::iterator it2 = baseclusters.begin(); it2 < baseclusters.end() && it2 < (baseclusters.begin() + interno) && it1 < baseclusters.end();){
+			inter++;
 			comp++;
-			if (it1 != it2 && similaridade(*it1, *it2)){
+			if (it1 != it2 && similaridade(*it1, *it2, true)){
+				cout << ext << " x " << inter << ": 1" << endl;
+
 				vector<int>::iterator inodo = 	(*it2).nodo.begin();
 				vector<int>::iterator ifirst =  (*it2).first_char_index.begin();
 				vector<int>::iterator itam = 	(*it2).tam_sufixo.begin();
@@ -209,6 +232,7 @@ void clust::merge_cluster (){
 				}
 			}
 			else{
+				//cout << ext << " x " << inter << ": 0" << endl;
 				it2++;
 			}
 			//if (interno >= N_RELEVANTES) break;
@@ -391,6 +415,7 @@ void clust::imprime_clusters(int n){
 				stream_doc_origin.seekg(0, ios::beg);
 
 			};
+			cout << "FIM_AGRUPAMENTO" << endl;
 			//cout << "==============================================================================" << endl;
 			}
 

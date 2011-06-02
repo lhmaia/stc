@@ -9,7 +9,7 @@
 #define USUARIO_H_
 
 #define M 				18795429
-#define MAX_LENGTH 		16 		//tamanho maximo de nome de usuario no twitter
+#define MAX_LENGTH 		50 		//tamanho maximo de nome de usuario no twitter
 #define TAM_VEC_USU 	10700000
 
 #include <iostream>
@@ -52,6 +52,9 @@ public:
 	static usuario* pesquisa_hash (string chave);
 
 	static void insere_hash (usuario* usu);
+
+	static int num_triangulos_total;
+	static unsigned long num_triplas_total;
 };
 
 

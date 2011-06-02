@@ -21,6 +21,9 @@ TipoPesos usuario::p;
 
 usuario usuario::usuarios [TAM_VEC_USU];
 
+int usuario::num_triangulos_total;
+unsigned long usuario::num_triplas_total;
+
 void usuario::GeraPesos (TipoPesos p){
 //funcao para gerar pesos
      int i;
@@ -47,7 +50,7 @@ usuario* usuario::pesquisa_hash (string chave){
 	int indice = hashing(chave);
 
 	for(vector<usuario*>::iterator it = hash[indice].begin(); it < hash[indice].end(); it++){
-		if ( (*(*it)).nome.compare(chave) == 0) return *it;
+		if ( (*it)->nome.compare(chave) == 0) return *it;
 	}
 	return NULL;
 }
@@ -64,15 +67,16 @@ double usuario::calcula_coefficient (){
 	for (vector<usuario*>::iterator it = segue.begin(); it < segue.end(); it++){
 		if (contem_usu(*it, seguidores)) interseccao++;
 	}
-	int num_triplas = (seguidores.size() * segue.size()) - interseccao;
-
-	if (num_triplas != 0)
-		cout << "passe aqui" << endl;
+	int num_triplas = ( (seguidores.size() * segue.size()) / 2 ) - ( ( interseccao * interseccao) / 2 );
 
 	int num_triangulos = 0;
 	for (vector<usuario*>::iterator it = seguidores.begin(); it < seguidores.end(); it++){
 		if (contem_usu(*it, segue)) num_triangulos++;
 	}
+
+	num_triplas_total += num_triplas;
+	num_triangulos_total += num_triangulos;
+
 	if (num_triplas == 0) lcoefficient = 0;
 	else
 		lcoefficient = ( (double) num_triangulos ) / ( (double) num_triplas );

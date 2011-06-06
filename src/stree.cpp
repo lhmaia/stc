@@ -14,6 +14,8 @@ int Node::Count = 1;
 int Edge::primeirotermo;
 int Edge::N;
 vector<string> Edge::termos;
+vector<int> Edge::doc_por_termo;
+
 set<tipo_termo, comp_tipotermo> Edge::conjunto_termos;
 set<string> Edge::termos_to_walk;
 TipoPesos Edge::p;
@@ -370,6 +372,7 @@ void inserir_frase (string frase, int doc, set <tipo_termo, comp_tipotermo> &set
 
 		if (tmp.size() > 0){
 			Edge::termos.push_back(tmp);
+			Edge::doc_por_termo.push_back(doc);
 			Edge::termos_to_walk.insert(tmp);
 
 			tipo_termo termotmp(tmp);
@@ -378,30 +381,6 @@ void inserir_frase (string frase, int doc, set <tipo_termo, comp_tipotermo> &set
 		}
 		pos = found + 1;
 	}
-	/*
-	//dividindo frase original em palavras
-	while(found != string::npos){
-			found = frase.find(" ", found + 1);
-			string tmp = frase.substr(pos, found - pos);
-
-			size_t n = tmp.find_first_of(' ');
-			while(n != string::npos){
-				tmp.erase(n, 1);
-				n = tmp.find_first_of(' ');
-			}
-
-			if (tmp.size() > 0){
-				Edge::termos.push_back(tmp);
-				Edge::termos_to_walk.insert(tmp);
-
-				tipo_termo termotmp(tmp);
-				set_termos_doc.insert(termotmp);
-				//cout << frase.substr(pos, found - pos) << endl;
-			}
-			pos = found + 1;
-		}
-	*/
-	//inserindo termo em um conjunto de termos deste documento
 
 	Edge::N = Edge::termos.size() - 1;
 

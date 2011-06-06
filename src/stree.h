@@ -130,7 +130,10 @@ class Edge {
 
         static int primeirotermo;
         static int N;
+
         static vector<string> termos;
+        static vector<int> doc_por_termo;
+
     	static set<tipo_termo, comp_tipotermo> conjunto_termos;
         static set<string> termos_to_walk;
 

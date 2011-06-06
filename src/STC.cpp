@@ -251,6 +251,7 @@ void clust::processa_label(){
 
 	//gerando frases
 	vector<string> frases;
+	vector<unsigned int> indices;
 	vector<float> cobertura;
 	string tmp_frase;
 	int tmp_numdocs;
@@ -277,6 +278,7 @@ void clust::processa_label(){
 
 		cobertura.push_back(cob);
 		frases.push_back(tmp_frase);
+		indices.push_back(t);
 	}
 	//cout << compara_frase(frases.at(0), frases.at(2), tam_sufixo.at(0), tam_sufixo.at(2)) << endl;
 

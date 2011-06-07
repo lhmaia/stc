@@ -78,6 +78,9 @@ public:
 	static void imprime_clusters (int n);
 	static void processa_clusters(float Threshold);
 
+	//funcao auxiliar
+	string strtolower(string str);
+
 	//funcoes para estatisticas
 	/*
 	 * gerando graficos de sufixo x numero de ocorrencia por documento no cluster

@@ -200,7 +200,7 @@ void clust::merge_cluster (){
 			inter++;
 			comp++;
 			if (it1 != it2 && similaridade(*it1, *it2, true)){
-				cout << ext << " x " << inter << ": 1" << endl;
+				//cout << ext << " x " << inter << ": 1" << endl;
 
 				vector<int>::iterator inodo = 	(*it2).nodo.begin();
 				vector<int>::iterator ifirst =  (*it2).first_char_index.begin();
@@ -241,6 +241,16 @@ void clust::merge_cluster (){
 	}
 	VERB cout << "Numero de comparacoes: " << comp << endl;
 }
+
+string clust::strtolower(string str){
+
+    int leng=str.length();
+    for(int i=0; i<leng; i++)
+        if (65<=str[i]&&str[i]<=90)//A-Z
+            str[i]+=32;
+    return str;
+}
+
 
 void clust::processa_label(){
 	//parametros do label
@@ -360,21 +370,52 @@ void clust::processa_label(){
 
 	int conta_frase = 0;
 	label = "";
+
+	ifstream stream_doc_origin (Reader::arquivo_original.c_str(), ios::in);
+
 	for (unsigned int i = 0; i < max; i++){
 		if (tabela_seleciona[i][2]){
 			conta_frase++;
-			if (label.compare("") == 0) label = frases.at(i);
+
+			//AQUI - BUSCAR AS FRASES ORIGINAIS
+
+			int contalinha = 1;
+			string documento;
+			int numdoc = Edge::doc_por_termo.at(first_char_index.at(indices.at(i)));
+			while (contalinha <= numdoc){
+				getline(stream_doc_origin, documento);
+				contalinha++;
+			}
+
+			documento = strtolower(documento);
+
+			string str_inicio = Edge::termos.at(first_char_index.at(indices.at(i)));
+			string str_fim = Edge::termos.at(first_char_index.at(indices.at(i)) + tam_sufixo.at(indices.at(i)) - 1);
+
+			size_t inicio = documento.find(str_inicio);
+			if (inicio == string::npos) inicio = documento.find_first_of(str_inicio);
+
+			size_t fim = documento.rfind(str_fim);
+			if (fim == string::npos) fim = documento.find_last_of(str_inicio);
+
+			fim += (str_fim.size() - 1);
+
+			string auxlabel = documento.substr(inicio, fim - inicio + 1);
+
+			stream_doc_origin.seekg(0, ios::beg);
+
+			if (label.compare("") == 0) label = auxlabel;
 			else {
 				label.append(", ");
-				label.append(frases.at(i));
+				label.append(auxlabel);
 			}
 			if (conta_frase >= num_frases) break;
 		}
 	}
 
+	stream_doc_origin.close();
+
 }
-
-
 
 void clust::imprime_clusters(int n){
 

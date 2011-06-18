@@ -120,6 +120,7 @@ bool clust::similaridade (clust c1, clust c2, bool calcula_inter_usu){
 	}
 	else{
 		float intersecaousu = intersecao_usu(c1, c2);
+		//cout << (float) intersecao / (float) c1.numero_documentos() << " x " << intersecaousu  << endl;
 		float valor1 = ( ( (float) intersecao )/( (float) c1.numero_documentos() ) + intersecaousu ) / 2;
 		float valor2 = ( ( (float) intersecao )/( (float) c2.numero_documentos() ) + intersecaousu ) / 2;
 
@@ -199,7 +200,7 @@ void clust::merge_cluster (){
 		for (vector<clust>::iterator it2 = baseclusters.begin(); it2 < baseclusters.end() && it2 < (baseclusters.begin() + interno) && it1 < baseclusters.end();){
 			inter++;
 			comp++;
-			if (it1 != it2 && similaridade(*it1, *it2, true)){
+			if (it1 != it2 && similaridade(*it1, *it2, false)){
 				//cout << ext << " x " << inter << ": 1" << endl;
 
 				vector<int>::iterator inodo = 	(*it2).nodo.begin();
@@ -429,6 +430,12 @@ void clust::imprime_clusters(int n){
 			cout << (*it).label << endl;
 			cout << (*it).documentos.size() << endl;
 
+			double valor = 0;
+			for (set<int>::iterator in = (*it).documentos.begin(); in != (*it).documentos.end(); in++){
+				valor += *in;
+			}
+			valor = valor / (double) (*it).documentos.size();
+			cout << valor << endl;
 			/*
 			cout << "Nodos: ";
 
@@ -458,7 +465,7 @@ void clust::imprime_clusters(int n){
 				stream_doc_origin.seekg(0, ios::beg);
 
 			};
-			cout << "FIM_AGRUPAMENTO" << endl;
+			//cout << "FIM_AGRUPAMENTO" << endl;
 			//cout << "==============================================================================" << endl;
 			}
 

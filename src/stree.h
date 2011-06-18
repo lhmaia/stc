@@ -7,9 +7,6 @@
 //
 // Mark Nelson, updated December, 2006
 //
-// This code has been tested with Borland C++ and
-// Microsoft Visual C++.
-//
 // This program asks you for a line of input, then
 // creates the suffix tree corresponding to the given
 // text. Additional code is provided to validate the

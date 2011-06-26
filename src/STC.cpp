@@ -14,7 +14,11 @@ bool verbose = false;
 
 vector<clust> clust::baseclusters;
 vector<string> clust::documents;
+vector<usuario*> clust::lista_usu_doc;
+int clust::define_width;
 float clust::threshold;
+
+int clust::conta_intervencao_metrica;
 
 void clust::Calculo_Score (vector<clust> &clusters){
 	for(vector<clust>::iterator it = clusters.begin(); it < clusters.end(); it++)
@@ -71,13 +75,48 @@ float clust::intersecao_usu (clust c1, clust c2){
 
 	set<string> conj_c1;
 	set<string> conj_c2;
+	pair<set<string>::iterator,bool> ret;
 
 	for(set<int>::iterator it = c1.documentos.begin(); it != c1.documentos.end(); it++){
-		conj_c1.insert(Reader::lista_usu_doc.at((*it) - 1).first->nome);
+		if (lista_usu_doc.at((*it) - 1) != NULL){
+			ret = conj_c1.insert(lista_usu_doc.at((*it) - 1)->nome);
+			if (ret.second){
+				for(vector<usuario*>::iterator itusu = lista_usu_doc.at((*it) - 1)->seguidores.begin();
+						itusu < lista_usu_doc.at((*it) - 1)->seguidores.end(); itusu++){
+					conj_c1.insert((*itusu)->nome);
+				}
+
+				for(vector<usuario*>::iterator itusu = lista_usu_doc.at((*it) - 1)->segue.begin();
+									itusu < lista_usu_doc.at((*it) - 1)->segue.end(); itusu++){
+					conj_c1.insert((*itusu)->nome);
+				}
+
+			}
+		}
+		//for(vector<string>::iterator it_usuarios = Reader::lista_usu.at(*it - 1).begin(); it_usuarios < Reader::lista_usu.at(*it - 1).end(); it_usuarios++){
+		//	conj_c1.insert(*it_usuarios);
+		//}
 	}
 
 	for(set<int>::iterator it = c2.documentos.begin(); it != c2.documentos.end(); it++){
-		conj_c2.insert(Reader::lista_usu_doc.at((*it) - 1).first->nome);
+		if (lista_usu_doc.at((*it) - 1) != NULL){
+			ret = conj_c2.insert(lista_usu_doc.at((*it) - 1)->nome);
+			if (ret.second){
+				for(vector<usuario*>::iterator itusu = lista_usu_doc.at((*it) - 1)->seguidores.begin();
+						itusu != lista_usu_doc.at((*it) - 1)->seguidores.end(); itusu++){
+					conj_c2.insert((*itusu)->nome);
+				}
+
+				for(vector<usuario*>::iterator itusu = lista_usu_doc.at((*it) - 1)->segue.begin();
+									itusu < lista_usu_doc.at((*it) - 1)->segue.end(); itusu++){
+					conj_c2.insert((*itusu)->nome);
+				}
+
+			}
+		}
+		//for(vector<string>::iterator it_usuarios = Reader::lista_usu.at(*it - 1).begin(); it_usuarios < Reader::lista_usu.at(*it - 1).end(); it_usuarios++){
+		//	conj_c2.insert(*it_usuarios);
+		//}
 	}
 
 	int intersecao = 0;
@@ -124,8 +163,26 @@ bool clust::similaridade (clust c1, clust c2, bool calcula_inter_usu){
 		float valor1 = ( ( (float) intersecao )/( (float) c1.numero_documentos() ) + intersecaousu ) / 2;
 		float valor2 = ( ( (float) intersecao )/( (float) c2.numero_documentos() ) + intersecaousu ) / 2;
 
+		//cout << "valor 1: " << valor1 << " x " << (float) intersecao / (float) c1.numero_documentos()  << endl;
+		//cout << "valor 2: " << valor2 << " x " << (float) intersecao / (float) c2.numero_documentos()  << endl;
+		//cout << endl;
+
+
 		comp1 = valor1 > threshold;
 		comp2 = valor2 > threshold;
+
+		bool comp1aux, comp2aux;
+		comp1aux = (float) intersecao / (float) c1.numero_documentos() > threshold;
+		comp2aux = (float) intersecao / (float) c2.numero_documentos() > threshold;
+
+		if ((comp1 && comp2) && !(comp1aux && comp2aux)){
+			cout << "diferente a favor" << endl;
+			conta_intervencao_metrica++;
+		}
+		else if (!(comp1 && comp2) && (comp1aux && comp2aux)) {
+			cout << "diferente contra" << endl;
+			conta_intervencao_metrica++;
+		}
 
 	}
 
@@ -189,9 +246,8 @@ int clust::numero_documentos(){
 	return documentos.size();
 }
 
-void clust::merge_cluster (){
-	int externo = N_RELEVANTES;
-	int interno = N_RELEVANTES;
+void clust::merge_cluster (bool considera_usuario, int externo, int interno){
+
 	int comp = 0;
 	int ext = 0;
 	int inter = 0;
@@ -200,7 +256,7 @@ void clust::merge_cluster (){
 		for (vector<clust>::iterator it2 = baseclusters.begin(); it2 < baseclusters.end() && it2 < (baseclusters.begin() + interno) && it1 < baseclusters.end();){
 			inter++;
 			comp++;
-			if (it1 != it2 && similaridade(*it1, *it2, false)){
+			if (it1 != it2 && similaridade(*it1, *it2, considera_usuario)){
 				//cout << ext << " x " << inter << ": 1" << endl;
 
 				vector<int>::iterator inodo = 	(*it2).nodo.begin();
@@ -424,18 +480,19 @@ void clust::imprime_clusters(int n){
 
 	ifstream stream_doc_origin (Reader::arquivo_original.c_str(), ios::in);
 
+	cout << n << endl;
+	cout << define_width << endl;
+
 	for (vector<clust>::iterator it = clust::baseclusters.begin(); it < clust::baseclusters.end() && it < (clust::baseclusters.begin() + n); it++){
 		if ((*it).tamanho_sufixo() >= 1){
 
+			//cout << "label:" << endl;
 			cout << (*it).label << endl;
 			cout << (*it).documentos.size() << endl;
+			cout << (*it).raio << endl;
+			cout << (*it).posicaoX << endl;
+			cout << (*it).posicaoY << endl;
 
-			double valor = 0;
-			for (set<int>::iterator in = (*it).documentos.begin(); in != (*it).documentos.end(); in++){
-				valor += *in;
-			}
-			valor = valor / (double) (*it).documentos.size();
-			cout << valor << endl;
 			/*
 			cout << "Nodos: ";
 
@@ -447,14 +504,15 @@ void clust::imprime_clusters(int n){
 			*/
 
 			//imprimindo os documentos
-			VERB
-			{
+			//VERB
+		//	{
 			//cout << "==============================================================================" << endl;
 
 			for (set<int>::iterator in = (*it).documentos.begin(); in != (*it).documentos.end(); in++){
 				int contalinha = 1;
 				//cout << *in << endl;
 				//cout << documents.at(*in - 1) << endl;
+
 
 				string documento;
 				while (contalinha <= *in){
@@ -464,10 +522,10 @@ void clust::imprime_clusters(int n){
 				cout << documento << endl;
 				stream_doc_origin.seekg(0, ios::beg);
 
-			};
+			}
 			//cout << "FIM_AGRUPAMENTO" << endl;
 			//cout << "==============================================================================" << endl;
-			}
+			//}
 
 			//imprimindo sufixo
 			/*
@@ -485,7 +543,7 @@ void clust::imprime_clusters(int n){
 	stream_doc_origin.close();
 }
 
-void clust::processa_clusters(float Threshold){
+void clust::processa_clusters(float Threshold, bool considera_usuario, int numtoprint){
 	//definindo o threshold
 	threshold = Threshold;
 
@@ -519,9 +577,9 @@ void clust::processa_clusters(float Threshold){
 
 		 //* ****************************************************
 
-
+	conta_intervencao_metrica = 0;
 	VERB cout << "* Fazendo merge de clusters similares ..." << endl;
-	merge_cluster();
+	merge_cluster(considera_usuario, N_RELEVANTES, N_RELEVANTES);
 
 	//calculo do tempo
 			gettimeofday(&tfim, NULL);
@@ -541,7 +599,7 @@ void clust::processa_clusters(float Threshold){
 			printf("tempo de sistema: %5f\n", tsistema);
 			printf("--------------------------------------------------\n");
 			*/
-			cout << clust::documents.size() << " " << texecucao << endl;
+			//cout << clust::documents.size() << " " << texecucao << endl;
 
 
 		 //* ****************************************************
@@ -556,7 +614,17 @@ void clust::processa_clusters(float Threshold){
 	for (int cluster = 0; cluster < N_RELEVANTES && cluster < baseclusters.size(); cluster++)
 		baseclusters.at(cluster).processa_label();
 
+	//repetindo fase de merge para os primeiros
+	merge_cluster(considera_usuario, numtoprint * 3, numtoprint * 3);
+
 	VERB cout << "* Processamento terminado!!!" << endl << endl;
+
+	VERB cout << "Numero de clusters: " << baseclusters.size() << endl;
+	VERB cout << "Numero de intervenções: " << conta_intervencao_metrica << endl;
+
+	determina_distancia(numtoprint);
+
+	imprime_clusters(numtoprint);
 }
 
 //funcoes para estatisticas
@@ -702,3 +770,104 @@ void clust::QuickSort (vector<string> &frases, vector<float> &cobertura){
 	Ordena (0, frases.size() - 1, frases, tmp_sufixo, cobertura);
 
 }
+
+void clust::determina_distancia(int n){
+	int width = 590;
+	int height = 595;
+	int calibragem_raio = 5;
+	int Xinicial = 10;
+	int Yinicial = 20;
+
+	int calculamaiorX = 0;
+
+	for(int i = 0; i < n; i++){
+		clust::baseclusters.at(i).raio = (float) calibragem_raio * log(clust::baseclusters.at(i).documentos.size());
+
+		clust::baseclusters.at(i).posicaoX = Xinicial + clust::baseclusters.at(i).raio;
+
+		if (clust::baseclusters.at(i).posicaoX > calculamaiorX) calculamaiorX = clust::baseclusters.at(i).posicaoX + clust::baseclusters.at(i).raio + Xinicial;
+
+		clust::baseclusters.at(i).posicaoY = Yinicial + i * (width / n); //+ clust::baseclusters.at(i).raio;
+
+
+		float diferenca = clust::baseclusters.at(i).raio - clust::baseclusters.at(i).posicaoY;
+
+		if (diferenca > 0) clust::baseclusters.at(i).posicaoY += diferenca;
+		else{
+			diferenca = (width - clust::baseclusters.at(i).posicaoY) - clust::baseclusters.at(i).raio;
+			if (diferenca < 0) clust::baseclusters.at(i).posicaoY -= diferenca;
+		}
+
+	}
+
+
+
+	for(int i = 1; i < n; i++){
+
+		bool aux_encontrou = true;
+
+		do{
+			bool encontrou_posicao[i - 1];
+			aux_encontrou = true;
+			for(int j = 0; j < i; j++){
+				float raioi = clust::baseclusters.at(i).raio;
+				float raioj = clust::baseclusters.at(j).raio;
+				float intersecao = log (intersecao_doc(clust::baseclusters.at(i), clust::baseclusters.at(j)));
+				float distancia_similaridade = ( calibragem_raio * intersecao );
+
+				float min = raioi  + raioj;
+				if (intersecao > 0)	min += distancia_similaridade;
+
+				float distancia = clust::calcula_distancia_euclidiana(clust::baseclusters.at(i), clust::baseclusters.at(j));
+				if (distancia > min + 10) encontrou_posicao[j] = true;
+				else encontrou_posicao[j] = false;
+			}
+
+			for(int j = 0; j < i; j++){
+				if (!encontrou_posicao[j]) aux_encontrou = false;
+			}
+			if (!aux_encontrou) {
+
+				if (clust::baseclusters.at(i).posicaoX < ( width - clust::baseclusters.at(i).raio ) ){
+					clust::baseclusters.at(i).posicaoX += 5;
+
+					if (clust::baseclusters.at(i).posicaoX > calculamaiorX) calculamaiorX = clust::baseclusters.at(i).posicaoX+ clust::baseclusters.at(i).raio + Xinicial;
+					//cout << clust::baseclusters.at(i).posicaoX << endl;
+				}
+				else {
+
+					if (clust::baseclusters.at(i).posicaoY < ( height - clust::baseclusters.at(i).raio ) ){
+						clust::baseclusters.at(i).posicaoY++;
+
+
+				//		cout << clust::baseclusters.at(i).posicaoX << endl;
+					}
+					else break;
+				}
+			}
+
+		}while(!aux_encontrou);
+	}
+
+	define_width = calculamaiorX;
+}
+
+float clust::calcula_distancia_euclidiana (clust c1, clust c2){
+	int distx = (c1.posicaoX - c2.posicaoX)*(c1.posicaoX - c2.posicaoX);
+	int disty = (c1.posicaoY - c2.posicaoY)*(c1.posicaoY - c2.posicaoY);
+
+	float distancia = sqrt(distx + disty);
+
+	return distancia;
+}
+
+
+
+
+
+
+
+
+
+
+

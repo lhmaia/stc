@@ -24,11 +24,8 @@ using namespace std;
 class Reader{
 	public:
 		Reader(string Path, string Path_origin);
-		void readDocument();
+		void readDocument(int num_docs, bool considera_usuario);
 		static string arquivo_original;
-
-		static vector<pair<set<Usuario, comp_usuario>::iterator, bool> > lista_usu_doc;
-		static set <Usuario, comp_usuario> lista_usuarios;
 
 	private:
 		string path;

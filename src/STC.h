@@ -18,7 +18,9 @@
 #include <sstream>
 #include <vector>
 #include <algorithm>
+#include <math.h>
 #include "stree.h"
+#include "usuario.h"
 #include "reader.h"
 
 using namespace std;
@@ -62,21 +64,32 @@ public:
 
 	void Particao (int Esq, int Dir, int &i, int &j, vector<string> &frases, vector<int> &tmp_sufixo, vector<float> &cobertura);
 
+	//informacoes para a visualizacao de dados
+	static int define_width;
+	int posicaoX;
+	int posicaoY;
+	float raio;
+
+	static float calcula_distancia_euclidiana (clust c1, clust c2);
+	//determina a distância para os primeiros n agrupamentos básicos
+	static void determina_distancia(int n);
+
 	/*****************************************************************************/
 
 	void processa_label();
 
 	static vector<clust> baseclusters;
 	static vector<string> documents;
+	static vector<usuario*> lista_usu_doc;
 	static float threshold;
 
 	static int compara_cluster(clust c1, clust c2);
 	static void ordena_clusters(vector<clust> &clusters);
 	static void insere_basecluster(int first, int tam, int Nodo);
-	static void merge_cluster ();
+	static void merge_cluster (bool considera_usuario, int externo, int interno);
 	static void Calculo_Score (vector<clust> &clusters);
 	static void imprime_clusters (int n);
-	static void processa_clusters(float Threshold);
+	static void processa_clusters(float Threshold, bool considera_usuario, int numtoprint);
 
 	//funcao auxiliar
 	string strtolower(string str);
@@ -95,6 +108,7 @@ public:
 	 * neste caso retorna true
 	 */
 	static bool similaridade (clust c1, clust c2, bool calcula_inter_usu);
+	static int conta_intervencao_metrica;
 
 	/*retorna o numero de elementos na intersecao
 	 * entre o conjunto de documentos de dois clusters

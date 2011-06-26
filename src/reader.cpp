@@ -9,17 +9,17 @@
 
 string Reader::arquivo_original;
 
-vector<pair<set<Usuario>::iterator, bool> > Reader::lista_usu_doc;
-set <Usuario, comp_usuario> Reader::lista_usuarios;
+//vector<vector<string>  > Reader::lista_usu;
 
 Reader::Reader(string Path, string Path_origin){
 	path = Path;
 	arquivo_original = Path_origin;
 }
 
-void Reader::readDocument(){
+void Reader::readDocument(int num_docs, bool considera_usuario){
 	ifstream stream_doc(path.c_str(), ios::in);
 	ifstream stream_doc_origin(arquivo_original.c_str(), ios::in);
+	//ifstream stream_lista_usuarios("/media/Documentos/Documentos/Computacao/Computacao201101/POC2/rede_ordenada.txt", ios::in);
 
 	if (!stream_doc.is_open() || !stream_doc_origin.is_open()) {
 		cout << "arquivo nao encontrado." << endl;
@@ -49,22 +49,12 @@ void Reader::readDocument(){
 
 		//nome de usuario, data e informacao de retweet
 		string usu = strtok(docaux_origin, " ");    //nome de usuario
-		Usuario user_tmp(usu);
 
 		//incluindo usuario na lista
-		pair<set<Usuario, comp_usuario>::iterator, bool> retorno;
-		retorno = lista_usuarios.insert(user_tmp);
-		lista_usu_doc.push_back(retorno);
-
-/*
-		strtok(NULL, " ") << endl;      //data do tweet
-		char *auxTok = strtok(NULL, " ");      //rt
-
-		if (auxTok != NULL && strcmp(auxTok, "rt") == 0) {
-			strtok(NULL, " ");
+		if (considera_usuario){
+			usuario* retorno = usuario::pesquisa_hash(usu);
+			clust::lista_usu_doc.push_back(retorno);
 		}
-*/
-
 
 		char *frase = NULL;
 		frase = strtok(docaux, ".;?!");
@@ -96,10 +86,12 @@ void Reader::readDocument(){
 		}
 
 		doc++;
+		if (num_docs > 0 && doc >= num_docs) break;
 
 		getline(stream_doc, document);
 		getline(stream_doc_origin, document_origin);
 	}
+
 	//dump_edges(Edge::N);
 	//walk_tree(0, 0, 0);
 	/*

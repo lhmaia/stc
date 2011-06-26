@@ -22,6 +22,8 @@ int main(int argc, char** argv)
 	int numtoprint = 0;
 	int numtostatistic = 0;
 	float threshold = 0.5;
+	bool considera_usuario = false;
+	int num_docs = 0;
 
 
 	// check the number of arguments
@@ -33,7 +35,7 @@ int main(int argc, char** argv)
 
 	int option;
 	// loop to receive information from the command line
-    while ( (option = getopt (argc, argv, "i:o:t:p:d:v:")) != EOF )
+    while ( (option = getopt (argc, argv, "i:o:t:n:p:d:v:u:")) != EOF )
 	{
     	switch (option)
 		{
@@ -52,6 +54,11 @@ int main(int argc, char** argv)
 		threshold = atof(optarg);
 			break;
 
+			//numero de documentos
+		case 'n' :
+		num_docs = atoi(optarg);
+			break;
+
 			//numero de clusters para impressao na tela
     	case 'p':
 			numtoprint = atoi(optarg);
@@ -65,21 +72,25 @@ int main(int argc, char** argv)
     		verbose = true;
     		break;
 
+    	case 'u':
+    		considera_usuario = true;
+    		break;
+
 		// mensagem de erro
 		default:
 			cout << "./a.out -i <nome_arquivo>" << endl;
 			exit(1);
 		}
 	}
+    //considera_usuario = true;
+	if (considera_usuario) usuario::carregar_usuarios();
 
 	Reader r (input_file_name, input_file_origin);
-	r.readDocument();
+	r.readDocument(num_docs, considera_usuario);
 
 	//execucao do processamento dos clusters
 
-	clust::processa_clusters(threshold);
-
-	clust::imprime_clusters(numtoprint);
+	clust::processa_clusters(threshold, considera_usuario, numtoprint);
 
     return 0;
 }
